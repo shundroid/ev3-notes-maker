@@ -1,7 +1,7 @@
 <template lang="pug">
   md-table-row
-    md-table-cell 1
-    md-table-cell 1
+    md-table-cell {{ pitch }}
+    md-table-cell {{ length }}
     md-table-cell.n-column-buttons
       md-button.md-icon-button
         md-icon delete
@@ -12,7 +12,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    pitch: Number,
+    length: Number
+  }
+};
 </script>
 
 <style scoped>

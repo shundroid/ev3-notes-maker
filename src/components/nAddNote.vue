@@ -2,19 +2,37 @@
   article
     section.section-input
       md-input-container
-        label Note Id
-        md-input(type="number")
+        label Pitch
+        md-input(type="number" v-model.number="pitch")
     section.section-input
       md-input-container
         label Length
-        md-input(type="number")
+        md-input(type="number" v-model.number="length")
     section
-      md-button.md-icon-button.n-done-button
+      md-button.md-icon-button.n-done-button(@click.native="addNote")
         md-icon done
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      pitch: 0,
+      length: 1
+    };
+  },
+  methods: {
+    addNote() {
+      console.log(this.pitch, this.length);
+      this.$store.dispatch("addNote", {
+        pitch: this.pitch,
+        length: this.length
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>

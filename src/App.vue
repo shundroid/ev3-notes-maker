@@ -10,6 +10,7 @@
 import nHeader from "./components/nHeader.vue";
 import nAddNote from "./components/nAddNote.vue";
 import nTable from "./components/nTable.vue";
+
 export default {
   components: {
     nHeader,
