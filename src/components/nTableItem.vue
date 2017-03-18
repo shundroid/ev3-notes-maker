@@ -3,16 +3,16 @@
     md-table-cell {{ pitch }}
     md-table-cell {{ length }}
     md-table-cell.n-column-buttons
-      md-button.md-icon-button(@click.native="removeNote")
+      md-button.md-icon-button(@click.native="remove")
         md-icon delete
-      md-button.md-icon-button
+      md-button.md-icon-button(@click.native="moveUp", :disabled="isDisabledMoveUp")
         md-icon keyboard_arrow_up
-      md-button.md-icon-button
+      md-button.md-icon-button(@click.native="moveDown", :disabled="isDisabledMoveDown")
         md-icon keyboard_arrow_down
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   props: {
@@ -21,8 +21,25 @@ export default {
     index: Number
   },
   methods: {
-    removeNote() {
+    remove() {
       this.$store.dispatch("removeNote", this.index);
+    },
+    moveUp() {
+      this.$store.dispatch("moveUpNote", this.index);
+    },
+    moveDown() {
+      this.$store.dispatch("moveDownNote", this.index);
+    }
+  },
+  computed: {
+    ...mapState({
+      notes: state => state.notes
+    }),
+    isDisabledMoveUp() {
+      return this.index === 0;
+    },
+    isDisabledMoveDown() {
+      return this.index === this.notes.length - 1;
     }
   }
 };

@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     addNote() {
-      console.log(this.pitch, this.length);
       this.$store.dispatch("addNote", {
         pitch: this.pitch,
         length: this.length
