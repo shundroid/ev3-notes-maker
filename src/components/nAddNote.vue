@@ -1,21 +1,16 @@
-<template>
-  <article>
-    <section class="section-input">
-      <md-input-container>
-        <label>Note Id</label>
-        <md-input type="number"></md-input>
-      </md-input-container>
-    </section>
-    <section class="section-input">
-      <md-input-container>
-        <label>Length</label>
-        <md-input type="number"></md-input>
-      </md-input-container>
-    </section>
-    <section>
-      <md-button class="md-icon-button n-done-button"><md-icon>done</md-icon></md-button>
-    </section>
-  </article>
+<template lang="pug">
+  article
+    section.section-input
+      md-input-container
+        label Note Id
+        md-input(type="number")
+    section.section-input
+      md-input-container
+        label Length
+        md-input(type="number")
+    section
+      md-button.md-icon-button.n-done-button
+        md-icon done
 </template>
 
 <script>

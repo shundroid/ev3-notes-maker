@@ -1,16 +1,12 @@
-<template>
-  <md-table>
-    <md-table-header>
-      <md-table-row>
-        <md-table-head>Note</md-table-head>
-        <md-table-head>Length</md-table-head>
-        <md-table-head class="n-column-buttons"></md-table-head>
-      </md-table-row>
-    </md-table-header>
-    <md-table-body>
-      <n-table-item></n-table-item>
-    </md-table-body>
-  </md-table>
+<template lang="pug">
+  md-table
+    md-table-header
+      md-table-row
+        md-table-head Note
+        md-table-head Length
+        md-table-head.n-column-buttons
+    md-table-body
+      n-table-item
 </template>
 
 <script>

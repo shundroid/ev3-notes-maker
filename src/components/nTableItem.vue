@@ -1,19 +1,14 @@
-<template>
-  <md-table-row>
-    <md-table-cell>1</md-table-cell>
-    <md-table-cell>1</md-table-cell>
-    <md-table-cell class="n-column-buttons">
-      <md-button class="md-icon-button">
-        <md-icon>delete</md-icon>
-      </md-button>
-      <md-button class="md-icon-button">
-        <md-icon>keyboard_arrow_up</md-icon>
-      </md-button>
-      <md-button class="md-icon-button">
-        <md-icon>keyboard_arrow_down</md-icon>
-      </md-button>
-    </md-table-cell>
-  </md-table-row>
+<template lang="pug">
+  md-table-row
+    md-table-cell 1
+    md-table-cell 1
+    md-table-cell.n-column-buttons
+      md-button.md-icon-button
+        md-icon delete
+      md-button.md-icon-button
+        md-icon keyboard_arrow_up
+      md-button.md-icon-button
+        md-icon keyboard_arrow_down
 </template>
 
 <script>

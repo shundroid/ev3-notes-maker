@@ -1,11 +1,9 @@
-<template>
-  <div id="app">
-    <n-header></n-header>
-    <main>
-      <n-add-note></n-add-note>
-      <n-table></n-table>
-    </main>
-  </div>
+<template lang="pug">
+  #app
+    n-header
+    main
+      n-add-note
+      n-table
 </template>
 
 <script>
