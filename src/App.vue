@@ -1,40 +1,22 @@
 <template>
   <div id="app">
     <n-header></n-header>
-    <md-table>
-      <md-table-header>
-        <md-table-row>
-          <md-table-head>Note</md-table-head>
-          <md-table-head>Length</md-table-head>
-          <md-table-head class="n-column-buttons"></md-table-head>
-        </md-table-row>
-      </md-table-header>
-      <md-table-body>
-        <md-table-row>
-          <md-table-cell>1</md-table-cell>
-          <md-table-cell>1</md-table-cell>
-          <md-table-cell class="n-column-buttons">
-            <md-button class="md-icon-button">
-              <md-icon>delete</md-icon>
-            </md-button>
-            <md-button class="md-icon-button">
-              <md-icon>keyboard arrow up</md-icon>
-            </md-button>
-            <md-button class="md-icon-button">
-              <md-icon>keyboard arrow down</md-icon>
-            </md-button>
-          </md-table-cell>
-        </md-table-row>
-      </md-table-body>
-    </md-table>
+    <main>
+      <n-add-note></n-add-note>
+      <n-table></n-table>
+    </main>
   </div>
 </template>
 
 <script>
 import nHeader from "./components/nHeader.vue";
+import nAddNote from "./components/nAddNote.vue";
+import nTable from "./components/nTable.vue";
 export default {
   components: {
-    nHeader
+    nHeader,
+    nAddNote,
+    nTable
   }
 }
 </script>
@@ -46,10 +28,8 @@ body {
 html, body, #app, .ml-main {
   height: 100vh;
 }
-.n-column-buttons {
-  width: 100px;
-}
-.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon {
-  margin: 8px;
+main {
+  width: 100%;
+  padding: 10px;
 }
 </style>
