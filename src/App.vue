@@ -1,27 +1,42 @@
 <template>
-  <md-layout md-column class="ml-main">
-    <md-layout md-column md-flex="10">
-      <md-toolbar class="md-whiteframe-2dp ml-header">
-        <h1 class="md-title">matter-lines Examples</h1>
-      </md-toolbar>
-    </md-layout>
-    <md-layout md-row md-flex="90">
-      <md-layout md-flex="20">
-        <md-list class="md-whiteframe-2dp ml-navigation">
-          <md-list-item>
-            aa
-          </md-list-item>
-        </md-list>
-      </md-layout>
-      <md-layout class="ml-main-view">
-        aa
-      </md-layout>
-    </md-layout>
-  </md-layout>
+  <div id="app">
+    <n-header></n-header>
+    <md-table>
+      <md-table-header>
+        <md-table-row>
+          <md-table-head>Note</md-table-head>
+          <md-table-head>Length</md-table-head>
+          <md-table-head class="n-column-buttons"></md-table-head>
+        </md-table-row>
+      </md-table-header>
+      <md-table-body>
+        <md-table-row>
+          <md-table-cell>1</md-table-cell>
+          <md-table-cell>1</md-table-cell>
+          <md-table-cell class="n-column-buttons">
+            <md-button class="md-icon-button">
+              <md-icon>delete</md-icon>
+            </md-button>
+            <md-button class="md-icon-button">
+              <md-icon>keyboard arrow up</md-icon>
+            </md-button>
+            <md-button class="md-icon-button">
+              <md-icon>keyboard arrow down</md-icon>
+            </md-button>
+          </md-table-cell>
+        </md-table-row>
+      </md-table-body>
+    </md-table>
+  </div>
 </template>
 
 <script>
-export default {}
+import nHeader from "./components/nHeader.vue";
+export default {
+  components: {
+    nHeader
+  }
+}
 </script>
 
 <style>
@@ -30,5 +45,11 @@ body {
 }
 html, body, #app, .ml-main {
   height: 100vh;
+}
+.n-column-buttons {
+  width: 100px;
+}
+.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon {
+  margin: 8px;
 }
 </style>
