@@ -4,7 +4,7 @@
 
 ## About
 
-This generates rtf files with songs written to play song on EV3.
+This generates rtf files with songs written to play songs on EV3.
 
 ![](https://docs.google.com/drawings/d/1ph6oJJBJu1-SHjYHEygapbATI-cvbtlA--QQRUWjqTM/pub?w=937&amp;h=281)
 
