@@ -6,7 +6,7 @@
         md-table-head Length
         md-table-head.n-column-buttons
     md-table-body
-      n-table-item(v-for="note in notes", :pitch="note.pitch", :length="note.length")
+      n-table-item(v-for="(note, index) in notes", :index="index", :pitch="note.pitch", :length="note.length")
 </template>
 
 <script>
