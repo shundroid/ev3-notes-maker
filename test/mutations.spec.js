@@ -11,6 +11,7 @@ describe("mutations", () => {
       mutations.addNote(state, note);
       assert.equal(state.notes.length, 1);
       assert.equal(state.notes[0], note);
+      assert(state.notes[0].key);
     });
   });
   describe("removeNote", () => {

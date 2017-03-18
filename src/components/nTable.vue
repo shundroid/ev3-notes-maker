@@ -5,8 +5,8 @@
         md-table-head Pitch
         md-table-head Length
         md-table-head.n-column-buttons
-    md-table-body
-      n-table-item(v-for="(note, index) in notes", :index="index", :pitch="note.pitch", :length="note.length")
+    transition-group(tag="md-table-body" name="notes-list")
+      n-table-item(v-for="(note, index) in notes", :key="note.key", :index="index", :pitch="note.pitch", :length="note.length")
 </template>
 
 <script>
@@ -26,5 +26,8 @@ export default {
 <style scoped>
 .n-column-buttons {
   width: 100px;
+}
+.notes-list-move {
+  transition: transform 0.2s;
 }
 </style>

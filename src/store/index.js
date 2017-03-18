@@ -9,6 +9,7 @@ export const state = {
 
 export const mutations = {
   addNote(state, payload) {
+    payload.key = Date.now();
     state.notes.push(payload);
   },
   removeNote(state, payload) {
