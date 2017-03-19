@@ -7,6 +7,7 @@
     "dev": "webpack --progress --colors --watch",
     "test": "mocha --compilers js:babel-core/register"
   },
+  "main": "main.js",
   "dependencies": {
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
