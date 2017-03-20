@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { generateSimpleActions } from "../../../src/store";
+import { generateSimpleActions } from "../../../app/src/renderer/vuex/store";
 import sinon from "sinon";
 
 describe("actions", () => {

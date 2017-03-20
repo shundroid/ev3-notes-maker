@@ -2,6 +2,8 @@
 
 ![](https://travis-ci.org/shundroid/ev3-notes-maker.svg?branch=master)
 
+> A generator of notes for EV3
+
 ## About
 
 This generates rtf files with songs written to play songs on EV3.
@@ -14,20 +16,20 @@ This generates rtf files with songs written to play songs on EV3.
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:9080
 npm run dev
 
-# build for production with minification
+# build electron app for production
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# lint all JS/Vue component files in `app/src`
+npm run lint
 
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+# run webpack in production
+npm run pack
 ```
+More information can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/docs/npm_scripts.html).
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+---
+
+This project was generated from [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about this project can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
