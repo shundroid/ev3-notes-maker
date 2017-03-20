@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { mutations } from "../src/store";
+import { mutations } from "../../../src/store";
 
 describe("mutations", () => {
   describe("addNote", () => {
