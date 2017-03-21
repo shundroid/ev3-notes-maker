@@ -41,7 +41,4 @@ article {
   flex: 1;
   margin-right: 10px;
 }
-article section .n-done-button {
-  margin-bottom: 20px;
-}
 </style>

@@ -1,5 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { remote } from "electron";
+import path from "path";
+import createSelectDirectoryPlugin from "./plugins/createSelectDirectoryPlugin";
 
 Vue.use(Vuex);
 
@@ -28,6 +31,8 @@ export const mutations = {
     }
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload + 1, 0, note);
+  },
+  selectDirectory() {
   }
 };
 
@@ -35,7 +40,11 @@ export function generateSimpleActions(mutations) {
   const actions = {};
   mutations.forEach(mutation => {
     actions[mutation] = ({ commit }, payload) => {
-      commit(mutation, payload);
+      if (payload) {
+        commit(mutation, payload);
+      } else {
+        commit(mutation);
+      }
     };
   });
   return actions;
@@ -44,11 +53,17 @@ export const actions = generateSimpleActions([
   "addNote",
   "removeNote",
   "moveUpNote",
-  "moveDownNote"
+  "moveDownNote",
+  "selectDirectory"
 ]);
+
+/* eslint no-console: 0 */
 
 export default new Vuex.Store({
   state,
   mutations,
-  actions
+  actions,
+  plugins: [
+    createSelectDirectoryPlugin()
+  ]
 });
