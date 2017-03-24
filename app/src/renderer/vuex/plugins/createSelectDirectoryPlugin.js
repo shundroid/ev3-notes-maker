@@ -1,4 +1,4 @@
-module.exports = function createSelectDirectoryPlugin(dialog) {
+export default function createSelectDirectoryPlugin() {
   return store => {
     store.subscribe(mutation => {
       switch (mutation.type) {
@@ -7,9 +7,4 @@ module.exports = function createSelectDirectoryPlugin(dialog) {
       }
     });
   };
-}
-
-function createDirectory(dialog) {
-  return new Promise(resolve => {
-  });
 }

@@ -1,7 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { remote } from "electron";
-import path from "path";
 import createSelectDirectoryPlugin from "./plugins/createSelectDirectoryPlugin";
 
 Vue.use(Vuex);
@@ -33,6 +31,7 @@ export const mutations = {
     state.notes.splice(payload + 1, 0, note);
   },
   selectDirectory() {
+    console.log("hoge");
   }
 };
 

@@ -7,12 +7,17 @@
       md-icon save
     md-button.md-icon-button
       md-icon open_in_browser
-    md-button.md-icon-button
+    md-button.md-icon-button(@click.native="selectDirectory")
       md-icon folder_open
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    selectDirectory() {
+    }
+  }
+};
 </script>
 
 <style scoped>

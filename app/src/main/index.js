@@ -1,11 +1,12 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
+import path from 'path'
 
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:${require('../../../config').port}`
-  : `file://${__dirname}/index.html`
+    ? `file://${path.join(__dirname, '../../dist/index.html')}`
+    : `file://${__dirname}/index.html`
 
 function createWindow () {
   /**
