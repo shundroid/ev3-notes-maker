@@ -1,14 +1,14 @@
 import { assert } from "chai";
-import { default as createOpenPlugin, OpenPlugin} from "@vuex/plugins/createOpenPlugin";
+import { default as createIOPlugin, IOPlugin} from "@vuex/plugins/createIOPlugin";
 
 
-describe("createOpenPlugin", () => {
+describe("createIOPlugin", () => {
   it("should create plugin", () => {
-    const plugin = createOpenPlugin();
+    const plugin = createIOPlugin();
     assert.typeOf(plugin, "function");
   });
   it("should parse", () => {
-    const plugin = new OpenPlugin({}, {});
+    const plugin = new IOPlugin({}, {});
     const parse1 = "1\r\n0.5\r\n8\r\n10\r\n100\r\n0.01\r\n3";
     const parseResult1 = [1, 0.5, 8, 10, 100, 0.01, 3];
     const parse2 = "1\r\n0.8\r\n40\r\nhoge";

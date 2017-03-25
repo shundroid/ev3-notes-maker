@@ -3,7 +3,7 @@
     h1.md-title {{ title }}
     md-button.md-icon-button(:disabled="disabled")
       md-icon play_arrow
-    md-button.md-icon-button(:disabled="disabled")
+    md-button.md-icon-button(:disabled="disabled" @click.native="save")
       md-icon save
     md-button.md-icon-button(@click.native="selectDirectory")
       md-icon folder_open
@@ -15,7 +15,8 @@ import getDirectoryName from "@lib/getDirectoryName";
 
 export default {
   methods: mapActions([
-    "selectDirectory"
+    "selectDirectory",
+    "save"
   ]),
   computed: {
     title() {
@@ -27,7 +28,7 @@ export default {
       }
     },
     disabled() {
-      return !this.$store.state.isOpenedFile;
+      return !this.$store.state.isOpened;
     }
   }
 };

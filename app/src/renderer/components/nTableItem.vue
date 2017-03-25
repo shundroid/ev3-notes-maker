@@ -1,6 +1,6 @@
 <template lang="pug">
   md-table-row
-    md-table-cell {{ pitch }}
+    md-table-cell {{ nKey }}
     md-table-cell {{ length }}
     md-table-cell.n-column-buttons
       md-button.md-icon-button(@click.native="remove")
@@ -16,7 +16,7 @@ import { mapState } from "vuex";
 
 export default {
   props: {
-    pitch: Number,
+    nKey: Number,
     length: Number,
     index: Number
   },

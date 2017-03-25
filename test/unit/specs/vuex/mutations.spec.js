@@ -77,8 +77,8 @@ describe("mutations", () => {
     mutations.setDirectory(state, directory);
     assert.equal(state.currentDirectory, directory);
   });
-  describe("openFile", () => {
-    const state = { notes: [], isOpenedFile: false };
+  describe("opened", () => {
+    const state = { notes: [], isOpened: false };
     const notes = {
       keys: [10, 6, 8, 9, 2],
       lengths: [1, 0.5, 8, 7, 4]
@@ -90,8 +90,8 @@ describe("mutations", () => {
       { key: 9, length: 7 },
       { key: 2, length: 4 }
     ];
-    mutations.openFile(state, notes);
+    mutations.opened(state, notes);
     assert.deepEqual(state.notes, correctNotes);
-    assert(state.isOpenedFile);
+    assert(state.isOpened);
   })
 });

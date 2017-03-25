@@ -2,36 +2,36 @@
   article
     section.section-input
       md-input-container
-        label Pitch
-        md-input(type="number" v-model.number="pitch", :disabled="disabled")
+        label Key
+        md-input(type="number" v-model.number="key", :disabled="disabled")
     section.section-input
       md-input-container
         label Length
         md-input(type="number" v-model.number="length", :disabled="disabled")
     section
       md-button.md-icon-button.n-done-button(@click.native="addNote", :disabled="disabled")
-        md-icon done
+        md-icon add
 </template>
 
 <script>
 export default {
   data() {
     return {
-      pitch: 0,
+      key: 0,
       length: 1
     };
   },
   methods: {
     addNote() {
       this.$store.dispatch("addNote", {
-        pitch: this.pitch,
+        key: this.key,
         length: this.length
       });
     }
   },
   computed: {
     disabled() {
-      return !this.$store.state.isOpenedFile;
+      return !this.$store.state.isOpened;
     }
   }
 };
@@ -47,6 +47,6 @@ article {
   margin-right: 10px;
 }
 .n-done-button {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 </style>

@@ -2,11 +2,11 @@
   md-table
     md-table-header
       md-table-row
-        md-table-head Pitch
+        md-table-head Key
         md-table-head Length
         md-table-head.n-column-buttons
     transition-group(tag="md-table-body" name="notes-list")
-      n-table-item(v-for="(note, index) in notes", :key="note.key", :index="index", :pitch="note.pitch", :length="note.length")
+      n-table-item(v-for="(note, index) in notes", :key="note.uniqueKey", :n-key="note.key", :index="index", :length="note.length")
 </template>
 
 <script>

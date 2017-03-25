@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
-import createOpenPlugin from "@vuex/plugins/createOpenPlugin";
+import createIOPlugin from "@vuex/plugins/createIOPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
@@ -9,12 +9,12 @@ Vue.use(Vuex);
 export const state = {
   notes: [],
   currentDirectory: null,
-  isOpenedFile: false
+  isOpened: false
 };
 
 export const mutations = {
   addNote(state, payload) {
-    payload.key = Date.now();
+    payload.uniqueKey = Date.now();
     state.notes.push(payload);
   },
   removeNote(state, payload) {
@@ -38,12 +38,12 @@ export const mutations = {
   setDirectory(state, payload) {
     state.currentDirectory = payload;
   },
-  openFile(state, payload) {
-    state.isOpenedFile = true;
-    state.notes = payload.keys.map((key, index) => {
-      return { key, length: payload.lengths[index] };
-    });
-  }
+  opened(state, payload) {
+    state.isOpened = true;
+    state.notes = payload;
+  },
+  save() {},
+  saved() {}
 };
 
 export function generateSimpleActions(mutations) {
@@ -66,7 +66,9 @@ export const actions = generateSimpleActions([
   "moveDownNote",
   "selectDirectory",
   "setDirectory",
-  "openFile"
+  "opened",
+  "save",
+  "saved"
 ]);
 
 /* eslint no-console: 0 */
@@ -77,6 +79,6 @@ export default new Vuex.Store({
   actions,
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
-    createOpenPlugin(remote.require("fs"), remote.require("path"))
+    createIOPlugin(remote.require("fs"), remote.require("path"))
   ]
 });
