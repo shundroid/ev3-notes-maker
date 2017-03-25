@@ -72,26 +72,26 @@ describe("mutations", () => {
     });
   });
   describe("setDirectory", () => {
-    const state = { currentDirectory: null };
-    const directory = "test-dir";
-    mutations.setDirectory(state, directory);
-    assert.equal(state.currentDirectory, directory);
+    it("should change currentdirectory", () => {
+      const state = { currentDirectory: null };
+      const directory = "test-dir";
+      mutations.setDirectory(state, directory);
+      assert.equal(state.currentDirectory, directory);
+    });
   });
   describe("opened", () => {
-    const state = { notes: [], isOpened: false };
-    const notes = {
-      keys: [10, 6, 8, 9, 2],
-      lengths: [1, 0.5, 8, 7, 4]
-    };
-    const correctNotes = [
-      { key: 10, length: 1 },
-      { key: 6, length: 0.5 },
-      { key: 8, length: 8 },
-      { key: 9, length: 7 },
-      { key: 2, length: 4 }
-    ];
-    mutations.opened(state, notes);
-    assert.deepEqual(state.notes, correctNotes);
-    assert(state.isOpened);
-  })
+    it("should change states", () => {
+      const state = { notes: [], isOpened: false };
+      const notes = [
+        { key: 10, length: 1 },
+        { key: 6, length: 0.5 },
+        { key: 8, length: 8 },
+        { key: 9, length: 7 },
+        { key: 2, length: 4 }
+      ];
+      mutations.opened(state, notes);
+      assert.equal(state.notes, notes);
+      assert(state.isOpened);
+    });
+  });
 });

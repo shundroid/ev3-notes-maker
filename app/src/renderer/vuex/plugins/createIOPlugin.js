@@ -82,9 +82,9 @@ export class IOPlugin {
       });
     });
   }
-  toNotes(keyBuffer, lengthBuffer) {
-    const keys = keyBuffer.split("\r\n");
-    const lengths = lengthBuffer.split("\r\n");
+  toNotes(keyText, lengthText) {
+    const keys = keyText.split("\r\n");
+    const lengths = lengthText.split("\r\n");
     const notes = [];
     if (keys.length !== lengths.length) {
       throw new Error("The length of keys doesn't equal the length of lengths.");
@@ -97,9 +97,9 @@ export class IOPlugin {
         throw new Error("The length is not a number. index: " + index);
       }
       notes.push({
-        key: parseInt(key),
-        length: parseInt(lengths[index]),
-        uniqueKey: Date.now()
+        key: parseFloat(key),
+        length: parseFloat(lengths[index]),
+        uniqueKey: index
       });
     });
     return notes;
