@@ -50,7 +50,7 @@ export function generateSimpleActions(mutations) {
   const actions = {};
   mutations.forEach(mutation => {
     actions[mutation] = ({ commit }, payload) => {
-      if (payload) {
+      if (payload === 0 || payload) {
         commit(mutation, payload);
       } else {
         commit(mutation);
