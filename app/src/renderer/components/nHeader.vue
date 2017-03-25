@@ -27,7 +27,7 @@ export default {
       }
     },
     disabled() {
-      return !this.$store.state.currentDirectory;
+      return !this.$store.state.isOpenedFile;
     }
   }
 };
