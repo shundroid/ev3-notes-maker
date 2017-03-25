@@ -6,9 +6,10 @@ export default function createSelectDirectoryPlugin(dialog) {
           properties: ["openDirectory"],
           title: "Select a directory",
           defaultPath: "."
-        }, (folderNames) => {
-          /* eslint-disable no-console */
-          console.log(folderNames);
+        }, directoryNames => {
+          if (directoryNames) {
+            store.dispatch("setDirectory", directoryNames[0]);
+          }
         });
       }
     });

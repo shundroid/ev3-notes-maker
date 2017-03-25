@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { mutations } from "../../../app/src/renderer/vuex/store";
+import { mutations } from "@vuex/store";
 
 describe("mutations", () => {
   describe("addNote", () => {

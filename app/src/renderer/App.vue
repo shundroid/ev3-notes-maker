@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import nHeader from "components/nHeader";
-import nAddNote from "components/nAddNote";
-import nTable from "components/nTable";
-import store from "renderer/vuex/store";
+import nHeader from "@components/nHeader";
+import nAddNote from "@components/nAddNote";
+import nTable from "@components/nTable";
+import store from "@vuex/store";
 
 export default {
   components: {

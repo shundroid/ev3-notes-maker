@@ -1,12 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createSelectDirectoryPlugin from "./plugins/createSelectDirectoryPlugin";
+import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
 
 export const state = {
-  notes: []
+  notes: [],
+  currentDirectory: null
 };
 
 export const mutations = {
@@ -32,6 +33,9 @@ export const mutations = {
     state.notes.splice(payload + 1, 0, note);
   },
   selectDirectory() {
+  },
+  setDirectory(state, payload) {
+    state.currentDirectory = payload;
   }
 };
 
@@ -53,7 +57,8 @@ export const actions = generateSimpleActions([
   "removeNote",
   "moveUpNote",
   "moveDownNote",
-  "selectDirectory"
+  "selectDirectory",
+  "setDirectory"
 ]);
 
 /* eslint no-console: 0 */
