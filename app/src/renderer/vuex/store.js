@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
+import createOpenPlugin from "@vuex/plugins/createOpenPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
 
 export const state = {
   notes: [],
-  currentDirectory: null
+  currentDirectory: null,
+  isOpenedFile: false
 };
 
 export const mutations = {
@@ -32,10 +34,15 @@ export const mutations = {
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload + 1, 0, note);
   },
-  selectDirectory() {
-  },
+  selectDirectory() {},
   setDirectory(state, payload) {
     state.currentDirectory = payload;
+  },
+  openFile(state, payload) {
+    state.isOpenedFile = true;
+    state.notes = payload.keys.map((key, index) => {
+      return { key, length: payload.lengths[index] };
+    });
   }
 };
 
@@ -58,7 +65,8 @@ export const actions = generateSimpleActions([
   "moveUpNote",
   "moveDownNote",
   "selectDirectory",
-  "setDirectory"
+  "setDirectory",
+  "openFile"
 ]);
 
 /* eslint no-console: 0 */
@@ -68,6 +76,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   plugins: [
-    createSelectDirectoryPlugin(remote.dialog)
+    createSelectDirectoryPlugin(remote.dialog),
+    createOpenPlugin(remote.require("fs"), remote.require("path"))
   ]
 });

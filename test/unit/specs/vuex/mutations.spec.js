@@ -7,7 +7,7 @@ describe("mutations", () => {
       const state = {
         notes: []
       };
-      const note = { pitch: 10, length: 2 };
+      const note = { key: 10, length: 2 };
       mutations.addNote(state, note);
       assert.equal(state.notes.length, 1);
       assert.equal(state.notes[0], note);
@@ -16,8 +16,8 @@ describe("mutations", () => {
   });
   describe("removeNote", () => {
     it("should remove", () => {
-      const note = { pitch: 10, length: 2 };
-      const note2 = { pitch: 8, length: 1 };
+      const note = { key: 10, length: 2 };
+      const note2 = { key: 8, length: 1 };
       const state = {
         notes: [note, note2]
       };
@@ -28,8 +28,8 @@ describe("mutations", () => {
   });
   describe("moveUpNote", () => {
     it("should move up", () => {
-      const note = { pitch: 10, length: 2 };
-      const note2 = { pitch: 8, length: 1 };
+      const note = { key: 10, length: 2 };
+      const note2 = { key: 8, length: 1 };
       const state = {
         notes: [note, note2]
       };
@@ -39,7 +39,7 @@ describe("mutations", () => {
       assert.equal(state.notes[1], note);
     });
     it("should throw", () => {
-      const note = { pitch: 10, length: 2 };
+      const note = { key: 10, length: 2 };
       const state = {
         notes: [note]
       };
@@ -50,8 +50,8 @@ describe("mutations", () => {
   });
   describe("moveDownNote", () => {
     it("should move down", () => {
-      const note = { pitch: 10, length: 2 };
-      const note2 = { pitch: 8, length: 1 };
+      const note = { key: 10, length: 2 };
+      const note2 = { key: 8, length: 1 };
       const state = {
         notes: [note, note2]
       };
@@ -61,8 +61,8 @@ describe("mutations", () => {
       assert.equal(state.notes[1], note);
     });
     it("should throw", () => {
-      const note = { pitch: 10, length: 2 };
-      const note2 = { pitch: 8, length: 1 };
+      const note = { key: 10, length: 2 };
+      const note2 = { key: 8, length: 1 };
       const state = {
         notes: [note, note2]
       };
@@ -71,4 +71,26 @@ describe("mutations", () => {
       }, Error);
     });
   });
+  describe("setDirectory", () => {
+    const state = { currentDirectory: null };
+    const directory = "test-dir";
+    mutations.setDirectory(state, directory);
+    assert.equal(state.currentDirectory, directory);
+  });
+  describe("openFile", () => {
+    const state = { notes: [] };
+    const notes = {
+      keys: [10, 6, 8, 9, 2],
+      lengths: [1, 0.5, 8, 7, 4]
+    };
+    const correctNotes = [
+      { key: 10, length: 1 },
+      { key: 6, length: 0.5 },
+      { key: 8, length: 8 },
+      { key: 9, length: 7 },
+      { key: 2, length: 4 }
+    ];
+    mutations.openFile(state, notes);
+    assert.deepEqual(state.notes, correctNotes);
+  })
 });
