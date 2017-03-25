@@ -9,8 +9,6 @@
     "vue-material": "^0.7.1",
     "vuex": "^2.1.1"
   },
-  "devDependencies": {
-    "electron-connect": "^0.6.1"
-  },
+  "devDependencies": {},
   "author": "shundroid <shundroidk@gmail.com>"
 }
