@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createSelectDirectoryPlugin from "./plugins/createSelectDirectoryPlugin";
+import { remote } from "electron";
 
 Vue.use(Vuex);
 
@@ -31,7 +32,6 @@ export const mutations = {
     state.notes.splice(payload + 1, 0, note);
   },
   selectDirectory() {
-    console.log("hoge");
   }
 };
 
@@ -63,6 +63,6 @@ export default new Vuex.Store({
   mutations,
   actions,
   plugins: [
-    createSelectDirectoryPlugin()
+    createSelectDirectoryPlugin(remote.dialog)
   ]
 });

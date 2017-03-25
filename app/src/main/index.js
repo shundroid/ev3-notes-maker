@@ -1,12 +1,14 @@
-'use strict'
+"use strict";
 
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
+import { app, BrowserWindow } from "electron";
+import path from "path";
 
-let mainWindow
-const winURL = process.env.NODE_ENV === 'development'
-    ? `file://${path.join(__dirname, '../../dist/index.html')}`
-    : `file://${__dirname}/index.html`
+import "./selectDirectory";
+
+let mainWindow;
+const winURL = process.env.NODE_ENV === "development"
+    ? `file://${path.join(__dirname, "../../dist/index.html")}`
+    : `file://${__dirname}/index.html`;
 
 function createWindow () {
   /**
@@ -15,28 +17,28 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 600,
     width: 800
-  })
+  });
 
-  mainWindow.loadURL(winURL)
+  mainWindow.loadURL(winURL);
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
 
   // eslint-disable-next-line no-console
-  console.log('mainWindow opened')
+  console.log("mainWindow opened");
 }
 
-app.on('ready', createWindow)
+app.on("ready", createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
-})
+});
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
-})
+});

@@ -60,7 +60,7 @@ function exit (code) {
 }
 
 console.log(`${YELLOW}Starting webpack...\n${END}`)
-run(`webpack --colors --config webpack.renderer.config.js`, YELLOW, 'webpack')
+run(`webpack --watch --colors --config webpack.renderer.config.js`, YELLOW, 'webpack')
 
 let timeoutId = null
 fs.watch('app/src/main', () => {
