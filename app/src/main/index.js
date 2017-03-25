@@ -3,8 +3,6 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
 
-import "./selectDirectory";
-
 let mainWindow;
 const winURL = process.env.NODE_ENV === "development"
     ? `file://${path.join(__dirname, "../../dist/index.html")}`
