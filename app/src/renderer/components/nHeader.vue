@@ -1,9 +1,9 @@
 <template lang="pug">
   md-toolbar.md-whiteframe-2dp.n-header
     h1.md-title {{ title }}
-    md-button.md-icon-button
+    md-button.md-icon-button(:disabled="disabled")
       md-icon play_arrow
-    md-button.md-icon-button
+    md-button.md-icon-button(:disabled="disabled")
       md-icon save
     md-button.md-icon-button(@click.native="selectDirectory")
       md-icon folder_open
@@ -25,6 +25,9 @@ export default {
       } else {
         return "No directory selected";
       }
+    },
+    disabled() {
+      return !this.$store.state.currentDirectory;
     }
   }
 };

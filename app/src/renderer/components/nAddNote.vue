@@ -3,13 +3,13 @@
     section.section-input
       md-input-container
         label Pitch
-        md-input(type="number" v-model.number="pitch")
+        md-input(type="number" v-model.number="pitch", :disabled="disabled")
     section.section-input
       md-input-container
         label Length
-        md-input(type="number" v-model.number="length")
+        md-input(type="number" v-model.number="length", :disabled="disabled")
     section
-      md-button.md-icon-button.n-done-button(@click.native="addNote")
+      md-button.md-icon-button.n-done-button(@click.native="addNote", :disabled="disabled")
         md-icon done
 </template>
 
@@ -28,6 +28,11 @@ export default {
         length: this.length
       });
     }
+  },
+  computed: {
+    disabled() {
+      return !this.$store.state.currentDirectory;
+    }
   }
 };
 </script>
@@ -40,5 +45,8 @@ article {
 .section-input {
   flex: 1;
   margin-right: 10px;
+}
+.n-done-button {
+  margin-top: 10px;
 }
 </style>
