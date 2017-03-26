@@ -3,34 +3,34 @@ import getFrequency from "@lib/getFrequency";
 export class PlayPlugin {
   constructor() {
     this.audioCtx = new AudioContext();
+    this.gainNode = this.audioCtx.createGain();
+    this.gainNode.gain.value = 0.1;
+    this.gainNode.connect(this.audioCtx.destination);
     this.plugin = store => {
       store.subscribe(mutation => {
         if (mutation.type === "play") {
-          this.play(store.state.notes).then(() => {
-            // TODO: Finished
-          });
+          const it = this.generateSequence(store.state.notes);
+          const tick = () => {
+            const note = it.next();
+            if (!note.done) {
+              setTimeout(tick, note.value.length * 500);
+            }
+          };
+          tick();
         }
       });
     }
   }
-  play(notes) {
-    return notes.map(note => {
-      return () => {
-        return new Promise(resolve => {
-          const osc = this.audioCtx.createOscillator();
-          osc.connect(this.audioCtx.destination);
-          osc.type = "square";
-          osc.frequency.value = getFrequency(note.key);
-          osc.start();
-          setTimeout(() => {
-            osc.stop();
-            resolve();
-          }, note.length * 500);
-        });
-      };
-    }).reduce((previous, current) => {
-      return previous.then(current);
-    }, Promise.resolve());
+  generateSequence = function* (notes) {
+    for (let note of notes) {
+      const osc = this.audioCtx.createOscillator();
+      osc.connect(this.gainNode);
+      osc.type = "square";
+      osc.frequency.value = getFrequency(note.key);
+      osc.start();
+      yield note;
+      osc.stop();
+    }
   }
 }
 

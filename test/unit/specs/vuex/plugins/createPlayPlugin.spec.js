@@ -17,7 +17,13 @@ describe("PlayPlugin", () => {
   });
   describe("#constructor()", () => {
     it("should initialize audioContext", () => {
+      assert(plugin.audioCtx);
       assert.instanceOf(plugin.audioCtx, AudioContext);
+    });
+    it("should initialize gainNode", () => {
+      assert(plugin.gainNode);
+      assert.instanceOf(plugin.gainNode, GainNode);
+      assert.equal(plugin.gainNode.gain.value, 0.1);
     });
   });
   describe("#plugin()", () => {
@@ -29,8 +35,8 @@ describe("PlayPlugin", () => {
       assert(spy.calledOnce);
     });
   });
-  describe("#play()", () => {
-    it("should play", done => {
+  describe("#generateSequence()", () => {
+    it("should generate", () => {
       const oscillator = {
         connect() {},
         type: "",
@@ -44,12 +50,12 @@ describe("PlayPlugin", () => {
           return oscillator;
         }
       };
+      const notes = [{ key: 9, length: 1 }];
       plugin.audioCtx = audioCtx;
-      plugin.play([{ key: 9, length: 1 }]).then(() => {
-        assert.equal(oscillator.type, "square");
-        assert.equal(oscillator.frequency.value, 440);
-        done();
-      });
+      const it = plugin.generateSequence(notes);
+      assert.deepEqual([...it], notes);
+      assert.equal(oscillator.type, "square");
+      assert.equal(oscillator.frequency.value, 440);
     });
   });
 });
