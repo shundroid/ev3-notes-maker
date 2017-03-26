@@ -2,8 +2,8 @@
   #app
     n-header
     main
-      n-add-note
       n-table
+      n-add-note
 </template>
 
 <script>
@@ -35,5 +35,8 @@ html, body, #app, .ml-main {
 main {
   width: 100%;
   padding: 10px;
+}
+#app {
+  margin-top: 64px;
 }
 </style>

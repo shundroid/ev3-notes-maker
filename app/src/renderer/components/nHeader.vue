@@ -1,5 +1,5 @@
 <template lang="pug">
-  md-toolbar.md-whiteframe-2dp.n-header
+  md-whiteframe.md-whiteframe-2dp.n-header(md-tag="md-toolbar" md-elevation="1")
     h1.md-title
       span.changed(:class="{ 'active-changed': isChanged }") ●
       | {{ title }}
@@ -44,6 +44,12 @@ export default {
 </script>
 
 <style scoped>
+.n-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+}
+
 .md-title {
   flex: 1;
 }
