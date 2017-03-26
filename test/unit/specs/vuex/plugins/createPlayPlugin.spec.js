@@ -23,7 +23,7 @@ describe("PlayPlugin", () => {
     it("should initialize gainNode", () => {
       assert(plugin.gainNode);
       assert.instanceOf(plugin.gainNode, GainNode);
-      assert.equal(plugin.gainNode.gain.value, 0.1);
+      assert.equal(Math.round(plugin.gainNode.gain.value * 10) / 10, 0.1);
     });
   });
   describe("#plugin()", () => {
