@@ -94,4 +94,25 @@ describe("mutations", () => {
       assert(state.isOpened);
     });
   });
+  describe("play", () => {
+    it("should set isPlaying to true", () => {
+      const state = { isPlaying: false };
+      mutations.play(state);
+      assert.equal(state.isPlaying, true);
+    });
+  });
+  describe("stop", () => {
+    it("should set isPlaying to false", () => {
+      const state = { isPlaying: true };
+      mutations.stop(state);
+      assert.equal(state.isPlaying, false);
+    });
+  });
+  describe("played", () => {
+    it("should set isPlaying to false", () => {
+      const state = { isPlaying: true };
+      mutations.played(state);
+      assert.equal(state.isPlaying, false);
+    });
+  });
 });

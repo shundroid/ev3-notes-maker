@@ -10,7 +10,8 @@ Vue.use(Vuex);
 export const state = {
   notes: [],
   currentDirectory: null,
-  isOpened: false
+  isOpened: false,
+  isPlaying: false
 };
 
 export const mutations = {
@@ -45,7 +46,15 @@ export const mutations = {
   },
   save() {},
   saved() {},
-  play() {}
+  play(state) {
+    state.isPlaying = true;
+  },
+  stop(state) {
+    state.isPlaying = false;
+  },
+  played(state) {
+    state.isPlaying = false;
+  }
 };
 
 export function generateSimpleActions(mutations) {
@@ -61,18 +70,27 @@ export function generateSimpleActions(mutations) {
   });
   return actions;
 }
-export const actions = generateSimpleActions([
-  "addNote",
-  "removeNote",
-  "moveUpNote",
-  "moveDownNote",
-  "selectDirectory",
-  "setDirectory",
-  "opened",
-  "save",
-  "saved",
-  "play"
-]);
+export const actions = {
+  ...generateSimpleActions([
+    "addNote",
+    "removeNote",
+    "moveUpNote",
+    "moveDownNote",
+    "selectDirectory",
+    "setDirectory",
+    "opened",
+    "save",
+    "saved",
+    "played"
+  ]),
+  togglePlay({ commit, state }) {
+    if (state.isPlaying) {
+      commit("stop");
+    } else {
+      commit("play");
+    }
+  }
+};
 
 /* eslint no-console: 0 */
 
@@ -83,6 +101,6 @@ export default new Vuex.Store({
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
     createIOPlugin(remote.require("fs"), remote.require("path")),
-    createPlayPlugin()
+    createPlayPlugin(new AudioContext)
   ]
 });

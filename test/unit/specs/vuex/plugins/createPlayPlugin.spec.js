@@ -2,9 +2,10 @@ import { assert } from "chai";
 import { default as createPlayPlugin, PlayPlugin } from "@vuex/plugins/createPlayPlugin";
 import sinon from "sinon";
 
+const audioContext = new AudioContext();
 describe("createPlayPlugin", () => {
   it("should create plugin", () => {
-    const plugin = createPlayPlugin();
+    const plugin = createPlayPlugin(audioContext);
     assert.typeOf(plugin, "function");
   });
 });
@@ -12,7 +13,7 @@ describe("createPlayPlugin", () => {
 describe("PlayPlugin", () => {
   let plugin;
   beforeEach(done => {
-    plugin = new PlayPlugin();
+    plugin = new PlayPlugin(audioContext);
     done();
   });
   describe("#constructor()", () => {
@@ -56,6 +57,21 @@ describe("PlayPlugin", () => {
       assert.deepEqual([...it], notes);
       assert.equal(oscillator.type, "square");
       assert.equal(oscillator.frequency.value, 440);
+    });
+  });
+  describe("#stop()", () => {
+    it("should clear timeoutId", () => {
+      plugin.timeoutId = setTimeout(() => {}, 10000);
+      plugin.currentOsc = { stop() {} };
+      plugin.stop();
+      assert.equal(plugin.timeoutId, null);
+    });
+    it("should stop", () => {
+      const spy = sinon.spy();
+      plugin.timeoutId = setTimeout(() => {}, 10000);
+      plugin.currentOsc = { stop: spy };
+      plugin.stop();
+      assert(spy.calledOnce);
     });
   });
 });

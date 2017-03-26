@@ -1,8 +1,8 @@
 <template lang="pug">
   md-toolbar.md-whiteframe-2dp.n-header
     h1.md-title {{ title }}
-    md-button.md-icon-button(:disabled="disabled" @click.native="play")
-      md-icon play_arrow
+    md-button.md-icon-button(:disabled="disabled" @click.native="togglePlay")
+      md-icon {{ playButtonState }}
     md-button.md-icon-button(:disabled="disabled" @click.native="save")
       md-icon save
     md-button.md-icon-button(@click.native="selectDirectory")
@@ -17,7 +17,7 @@ export default {
   methods: mapActions([
     "selectDirectory",
     "save",
-    "play"
+    "togglePlay"
   ]),
   computed: {
     title() {
@@ -30,6 +30,9 @@ export default {
     },
     disabled() {
       return !this.$store.state.isOpened;
+    },
+    playButtonState() {
+      return this.$store.state.isPlaying ? "stop" : "play_arrow";
     }
   }
 };
