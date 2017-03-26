@@ -5,12 +5,14 @@ describe("mutations", () => {
   describe("addNote", () => {
     it("should add", () => {
       const state = {
-        notes: []
+        notes: [],
+        isChanged: false
       };
       const note = { key: 10, length: 2 };
       mutations.addNote(state, note);
       assert.equal(state.notes.length, 1);
       assert.equal(state.notes[0], note);
+      assert.equal(state.isChanged, true);
       assert(state.notes[0].key);
     });
   });
@@ -19,11 +21,13 @@ describe("mutations", () => {
       const note = { key: 10, length: 2 };
       const note2 = { key: 8, length: 1 };
       const state = {
-        notes: [note, note2]
+        notes: [note, note2],
+        isChanged: false
       };
       mutations.removeNote(state, 0);
       assert.equal(state.notes.length, 1);
       assert.equal(state.notes[0], note2);
+      assert.equal(state.isChanged, true);
     });
   });
   describe("moveUpNote", () => {
@@ -31,17 +35,20 @@ describe("mutations", () => {
       const note = { key: 10, length: 2 };
       const note2 = { key: 8, length: 1 };
       const state = {
-        notes: [note, note2]
+        notes: [note, note2],
+        isChanged: false
       };
       mutations.moveUpNote(state, 1);
       assert.equal(state.notes.length, 2);
       assert.equal(state.notes[0], note2);
       assert.equal(state.notes[1], note);
+      assert.equal(state.isChanged, true);
     });
     it("should throw", () => {
       const note = { key: 10, length: 2 };
       const state = {
-        notes: [note]
+        notes: [note],
+        isChanged: false
       };
       assert.throw(() => {
         mutations.moveUpNote(state, 0)
@@ -53,18 +60,21 @@ describe("mutations", () => {
       const note = { key: 10, length: 2 };
       const note2 = { key: 8, length: 1 };
       const state = {
-        notes: [note, note2]
+        notes: [note, note2],
+        isChanged: false
       };
       mutations.moveDownNote(state, 0);
       assert.equal(state.notes.length, 2);
       assert.equal(state.notes[0], note2);
       assert.equal(state.notes[1], note);
+      assert.equal(state.isChanged, true);
     });
     it("should throw", () => {
       const note = { key: 10, length: 2 };
       const note2 = { key: 8, length: 1 };
       const state = {
-        notes: [note, note2]
+        notes: [note, note2],
+        isChanged: false
       };
       assert.throw(() => {
         mutations.moveDownNote(state, 1)
@@ -93,6 +103,11 @@ describe("mutations", () => {
       assert.equal(state.notes, notes);
       assert(state.isOpened);
     });
+  });
+  describe("saved", () => {
+    const state = { isChanged: true };
+    mutations.saved(state);
+    assert.equal(state.isChanged, false);
   });
   describe("play", () => {
     it("should set isPlaying to true", () => {

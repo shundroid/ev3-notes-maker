@@ -12,21 +12,25 @@ export const state = {
   currentDirectory: null,
   isOpened: false,
   isPlaying: false,
-  playingNoteIndex: -1
+  playingNoteIndex: -1,
+  isChanged: false
 };
 
 export const mutations = {
   addNote(state, payload) {
+    state.isChanged = true;
     payload.uniqueKey = state.notes.length;
     state.notes.push(payload);
   },
   removeNote(state, payload) {
+    state.isChanged = true;
     state.notes.splice(payload, 1);
   },
   moveUpNote(state, payload) {
     if (payload <= 0) {
       throw new Error("Tryed to move up but it's first note.");
     }
+    state.isChanged = true;
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload - 1, 0, note);
   },
@@ -34,6 +38,7 @@ export const mutations = {
     if (payload >= state.notes.length - 1) {
       throw new Error("Tryed to move up but it's last note.");
     }
+    state.isChanged = true;
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload + 1, 0, note);
   },
@@ -46,7 +51,9 @@ export const mutations = {
     state.notes = payload;
   },
   save() {},
-  saved() {},
+  saved(state) {
+    state.isChanged = false;
+  },
   play(state) {
     state.isPlaying = true;
   },
