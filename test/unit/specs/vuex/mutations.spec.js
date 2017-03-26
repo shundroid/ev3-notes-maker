@@ -81,6 +81,21 @@ describe("mutations", () => {
       }, Error);
     });
   });
+  describe("updateNote", () => {
+    it("should update a note", () => {
+      const note = { key: 0, length: 1 };
+      const state = {
+        notes: [note],
+        isChanged: false
+      };
+      const newNote = { key: 1, length: 3 };
+      mutations.updateNote(state, { index: 0, note: newNote });
+      assert.equal(state.notes.length, 1);
+      assert.equal(state.notes[0].key, newNote.key);
+      assert.equal(state.notes[0].length, newNote.length);
+      assert.equal(state.isChanged, true);
+    });
+  });
   describe("setDirectory", () => {
     it("should change currentdirectory", () => {
       const state = { currentDirectory: null };

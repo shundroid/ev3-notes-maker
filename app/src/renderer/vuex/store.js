@@ -19,7 +19,9 @@ export const state = {
 export const mutations = {
   addNote(state, payload) {
     state.isChanged = true;
-    payload.uniqueKey = state.notes.length;
+    if (typeof payload.uniqueKey === "undefined") {
+      payload.uniqueKey = state.notes.length;
+    }
     state.notes.push(payload);
   },
   removeNote(state, payload) {
@@ -41,6 +43,14 @@ export const mutations = {
     state.isChanged = true;
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload + 1, 0, note);
+  },
+  updateNote(state, { index, note }) {
+    if (index >= state.notes.length && index < 0) {
+      throw new Error("Invalid index: " + index);
+    }
+    state.isChanged = true;
+    state.notes[index].key = note.key;
+    state.notes[index].length = note.length;
   },
   selectDirectory() {},
   setDirectory(state, payload) {
@@ -89,6 +99,7 @@ export const actions = {
     "removeNote",
     "moveUpNote",
     "moveDownNote",
+    "updateNote",
     "selectDirectory",
     "setDirectory",
     "opened",
