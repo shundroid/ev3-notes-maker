@@ -14,7 +14,7 @@ export const state = {
 
 export const mutations = {
   addNote(state, payload) {
-    payload.uniqueKey = Date.now();
+    payload.uniqueKey = state.notes.length;
     state.notes.push(payload);
   },
   removeNote(state, payload) {
