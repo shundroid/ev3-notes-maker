@@ -16,11 +16,12 @@ let rendererConfig = {
   entry: {
     renderer: path.join(__dirname, "app/src/renderer/main.js")
   },
-  externals: Object.keys(pkg.dependencies || {}).concat([
+  externals: [
+    ...Object.keys(pkg.dependencies || {}),
     "spawn-sync",
     "utf-8-validate",
     "bufferutil"
-  ]),
+  ],
   module: {
     rules: [
       {
