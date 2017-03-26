@@ -1,5 +1,5 @@
 export class PlayPlugin {
-  constructor(Tone) {
+  constructor() {
     this.audioCtx = new AudioContext();
     this.plugin = store => {
       store.subscribe(mutation => {
@@ -29,6 +29,6 @@ export class PlayPlugin {
   }
 }
 
-export default function createPlayPlugin(tone) {
-  return new PlayPlugin(tone).plugin;
+export default function createPlayPlugin() {
+  return new PlayPlugin().plugin;
 }

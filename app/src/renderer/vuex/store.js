@@ -83,6 +83,6 @@ export default new Vuex.Store({
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
     createIOPlugin(remote.require("fs"), remote.require("path")),
-    createPlayPlugin(require("tone"))
+    createPlayPlugin()
   ]
 });
