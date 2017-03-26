@@ -1,7 +1,7 @@
 <template lang="pug">
   md-toolbar.md-whiteframe-2dp.n-header
     h1.md-title {{ title }}
-    md-button.md-icon-button(:disabled="disabled")
+    md-button.md-icon-button(:disabled="disabled" @click.native="play")
       md-icon play_arrow
     md-button.md-icon-button(:disabled="disabled" @click.native="save")
       md-icon save
@@ -16,7 +16,8 @@ import getDirectoryName from "@lib/getDirectoryName";
 export default {
   methods: mapActions([
     "selectDirectory",
-    "save"
+    "save",
+    "play"
   ]),
   computed: {
     title() {

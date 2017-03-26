@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
 import createIOPlugin from "@vuex/plugins/createIOPlugin";
+import createPlayPlugin from "@vuex/plugins/createPlayPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
@@ -43,7 +44,8 @@ export const mutations = {
     state.notes = payload;
   },
   save() {},
-  saved() {}
+  saved() {},
+  play() {}
 };
 
 export function generateSimpleActions(mutations) {
@@ -68,7 +70,8 @@ export const actions = generateSimpleActions([
   "setDirectory",
   "opened",
   "save",
-  "saved"
+  "saved",
+  "play"
 ]);
 
 /* eslint no-console: 0 */
@@ -79,6 +82,7 @@ export default new Vuex.Store({
   actions,
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
-    createIOPlugin(remote.require("fs"), remote.require("path"))
+    createIOPlugin(remote.require("fs"), remote.require("path")),
+    createPlayPlugin(require("tone"))
   ]
 });
