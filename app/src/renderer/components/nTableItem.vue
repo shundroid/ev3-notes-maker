@@ -1,5 +1,5 @@
 <template lang="pug">
-  md-table-row
+  md-table-row(:class="{ 'playing-row': isPlaying }")
     md-table-cell {{ nKey }}
     md-table-cell {{ length }}
     md-table-cell.n-column-buttons
@@ -32,14 +32,18 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      notes: state => state.notes
-    }),
+    ...mapState([
+      "notes",
+      "playingNoteIndex"
+    ]),
     isDisabledMoveUp() {
       return this.index === 0;
     },
     isDisabledMoveDown() {
       return this.index === this.notes.length - 1;
+    },
+    isPlaying() {
+      return this.index === this.playingNoteIndex;
     }
   }
 };
@@ -48,5 +52,9 @@ export default {
 <style scoped>
 .n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon {
   margin: 8px;
+}
+
+.playing-row {
+  background-color: #fce4ec;
 }
 </style>

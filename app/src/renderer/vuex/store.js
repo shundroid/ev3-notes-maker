@@ -11,7 +11,8 @@ export const state = {
   notes: [],
   currentDirectory: null,
   isOpened: false,
-  isPlaying: false
+  isPlaying: false,
+  playingNoteIndex: -1
 };
 
 export const mutations = {
@@ -51,9 +52,14 @@ export const mutations = {
   },
   stop(state) {
     state.isPlaying = false;
+    state.playingNoteIndex = -1;
   },
   played(state) {
     state.isPlaying = false;
+    state.playingNoteIndex = -1;
+  },
+  updatePlayingNoteIndex(state, index) {
+    state.playingNoteIndex = index;
   }
 };
 
@@ -81,7 +87,8 @@ export const actions = {
     "opened",
     "save",
     "saved",
-    "played"
+    "played",
+    "updatePlayingNoteIndex"
   ]),
   togglePlay({ commit, state }) {
     if (state.isPlaying) {

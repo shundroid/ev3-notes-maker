@@ -102,17 +102,27 @@ describe("mutations", () => {
     });
   });
   describe("stop", () => {
-    it("should set isPlaying to false", () => {
-      const state = { isPlaying: true };
+    it("should change states", () => {
+      const state = { isPlaying: true, playingNoteIndex: 10 };
       mutations.stop(state);
       assert.equal(state.isPlaying, false);
+      assert.equal(state.playingNoteIndex, -1);
     });
   });
   describe("played", () => {
-    it("should set isPlaying to false", () => {
-      const state = { isPlaying: true };
+    it("should change states", () => {
+      const state = { isPlaying: true, playingNoteIndex: 10 };
       mutations.played(state);
       assert.equal(state.isPlaying, false);
+      assert.equal(state.playingNoteIndex, -1);
+    });
+  });
+  describe("updatePlayingNoteIndex", () => {
+    it("should change playingNoteIndex", () => {
+      const state = { playingNoteIndex: -1 };
+      const nextIndex = 2;
+      mutations.updatePlayingNoteIndex(state, nextIndex);
+      assert.equal(state.playingNoteIndex, nextIndex);
     });
   });
 });

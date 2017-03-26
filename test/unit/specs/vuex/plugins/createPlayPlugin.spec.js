@@ -54,7 +54,7 @@ describe("PlayPlugin", () => {
       const notes = [{ key: 9, length: 1 }];
       plugin.audioCtx = audioCtx;
       const it = plugin.generateSequence(notes);
-      assert.deepEqual([...it], notes);
+      assert.deepEqual([...it], [[0].concat(notes)]);
       assert.equal(oscillator.type, "square");
       assert.equal(oscillator.frequency.value, 440);
     });

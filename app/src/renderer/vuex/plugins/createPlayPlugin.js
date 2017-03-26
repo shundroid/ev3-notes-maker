@@ -13,9 +13,11 @@ export class PlayPlugin {
         if (mutation.type === "play") {
           const it = this.generateSequence(store.state.notes);
           const tick = () => {
-            const note = it.next();
-            if (!note.done) {
-              this.timeoutId = setTimeout(tick, note.value.length * 500);
+            const item = it.next();
+            if (!item.done) {
+              const [index, note] = item.value;
+              store.dispatch("updatePlayingNoteIndex", index);
+              this.timeoutId = setTimeout(tick, note.length * 500);
             } else {
               store.dispatch("played");
             }
@@ -35,13 +37,14 @@ export class PlayPlugin {
     }
   }
   generateSequence = function* (notes) {
+    let index = 0;
     for (let note of notes) {
       this.currentOsc = this.audioCtx.createOscillator();
       this.currentOsc.connect(this.gainNode);
       this.currentOsc.type = "square";
       this.currentOsc.frequency.value = getFrequency(note.key);
       this.currentOsc.start();
-      yield note;
+      yield [index++, note];
       this.currentOsc.stop();
     }
   }
