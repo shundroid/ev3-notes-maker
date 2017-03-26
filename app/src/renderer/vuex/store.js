@@ -57,6 +57,7 @@ export const mutations = {
     state.currentDirectory = payload;
   },
   opened(state, payload) {
+    state.isChanged = false;
     state.isOpened = true;
     state.notes = payload;
   },

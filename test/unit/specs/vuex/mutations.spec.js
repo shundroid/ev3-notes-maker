@@ -117,6 +117,7 @@ describe("mutations", () => {
       mutations.opened(state, notes);
       assert.equal(state.notes, notes);
       assert(state.isOpened);
+      assert(!state.isChanged);
     });
   });
   describe("saved", () => {
