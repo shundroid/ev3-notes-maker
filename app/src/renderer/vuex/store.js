@@ -10,21 +10,29 @@ Vue.use(Vuex);
 export const state = {
   notes: [],
   currentDirectory: null,
-  isOpened: false
+  isOpened: false,
+  isPlaying: false,
+  playingNoteIndex: -1,
+  isChanged: false
 };
 
 export const mutations = {
   addNote(state, payload) {
-    payload.uniqueKey = state.notes.length;
+    state.isChanged = true;
+    if (typeof payload.uniqueKey === "undefined") {
+      payload.uniqueKey = state.notes.length;
+    }
     state.notes.push(payload);
   },
   removeNote(state, payload) {
+    state.isChanged = true;
     state.notes.splice(payload, 1);
   },
   moveUpNote(state, payload) {
     if (payload <= 0) {
       throw new Error("Tryed to move up but it's first note.");
     }
+    state.isChanged = true;
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload - 1, 0, note);
   },
@@ -32,20 +40,45 @@ export const mutations = {
     if (payload >= state.notes.length - 1) {
       throw new Error("Tryed to move up but it's last note.");
     }
+    state.isChanged = true;
     const note = state.notes.splice(payload, 1)[0];
     state.notes.splice(payload + 1, 0, note);
+  },
+  updateNote(state, { index, note }) {
+    if (index >= state.notes.length && index < 0) {
+      throw new Error("Invalid index: " + index);
+    }
+    state.isChanged = true;
+    state.notes[index].key = note.key;
+    state.notes[index].length = note.length;
   },
   selectDirectory() {},
   setDirectory(state, payload) {
     state.currentDirectory = payload;
   },
   opened(state, payload) {
+    state.isChanged = false;
     state.isOpened = true;
     state.notes = payload;
   },
   save() {},
-  saved() {},
-  play() {}
+  saved(state) {
+    state.isChanged = false;
+  },
+  play(state) {
+    state.isPlaying = true;
+  },
+  stop(state) {
+    state.isPlaying = false;
+    state.playingNoteIndex = -1;
+  },
+  played(state) {
+    state.isPlaying = false;
+    state.playingNoteIndex = -1;
+  },
+  updatePlayingNoteIndex(state, index) {
+    state.playingNoteIndex = index;
+  }
 };
 
 export function generateSimpleActions(mutations) {
@@ -61,18 +94,29 @@ export function generateSimpleActions(mutations) {
   });
   return actions;
 }
-export const actions = generateSimpleActions([
-  "addNote",
-  "removeNote",
-  "moveUpNote",
-  "moveDownNote",
-  "selectDirectory",
-  "setDirectory",
-  "opened",
-  "save",
-  "saved",
-  "play"
-]);
+export const actions = {
+  ...generateSimpleActions([
+    "addNote",
+    "removeNote",
+    "moveUpNote",
+    "moveDownNote",
+    "updateNote",
+    "selectDirectory",
+    "setDirectory",
+    "opened",
+    "save",
+    "saved",
+    "played",
+    "updatePlayingNoteIndex"
+  ]),
+  togglePlay({ commit, state }) {
+    if (state.isPlaying) {
+      commit("stop");
+    } else {
+      commit("play");
+    }
+  }
+};
 
 /* eslint no-console: 0 */
 
@@ -83,6 +127,6 @@ export default new Vuex.Store({
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
     createIOPlugin(remote.require("fs"), remote.require("path")),
-    createPlayPlugin()
+    createPlayPlugin(new AudioContext)
   ]
 });
