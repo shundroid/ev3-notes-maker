@@ -4,19 +4,22 @@
     main
       n-table
       n-add-note
+      n-piano
 </template>
 
 <script>
 import nHeader from "@components/nHeader";
 import nAddNote from "@components/nAddNote";
 import nTable from "@components/nTable";
+import nPiano from "@components/nPiano";
 import store from "@vuex/store";
 
 export default {
   components: {
     nHeader,
     nAddNote,
-    nTable
+    nTable,
+    nPiano
   },
   store
 };
