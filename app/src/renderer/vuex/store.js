@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
 import createIOPlugin from "@vuex/plugins/createIOPlugin";
 import createPlayPlugin from "@vuex/plugins/createPlayPlugin";
+import createShortcutPlugin from "@vuex/plugins/createShortcutPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
@@ -127,6 +128,7 @@ export default new Vuex.Store({
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
     createIOPlugin(remote.require("fs"), remote.require("path")),
-    createPlayPlugin(new AudioContext)
+    createPlayPlugin(new AudioContext),
+    createShortcutPlugin()
   ]
 });
