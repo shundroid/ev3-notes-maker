@@ -3,46 +3,56 @@
     .status C#4
     .piano-parent
       .keys
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
-        .black-key
-        .white-key
+        div(v-for="key in keys", :is="'n-' + key.key + '-key'", :pitch="key.pitch")
 </template>
+
+<script>
+import nWhiteKey from "@components/piano/nWhiteKey";
+import nBlackKey from "@components/piano/nBlackKey";
+
+const octave = {
+  C: "white",
+  "C#": "black",
+  D: "white",
+  "D#": "black",
+  E: "white",
+  F: "white",
+  "F#": "black",
+  G: "white",
+  "G#": "black",
+  A: "white",
+  "A#": "black",
+  B: "white"
+};
+
+function generateOctaves() {
+  const octaves = [];
+  for (let i = 1; i < 8; i++) {
+    octaves.push(...Object.keys(octave).map(pitch => {
+      return { pitch: pitch + i, key: octave[pitch] };
+    }));
+  }
+  return octaves;
+}
+
+const allKeys = [
+  { pitch: "A0", key: "white" }, { pitch: "A#0", key: "black" }, { pitch: "B0", key: "white" },
+  ...generateOctaves()
+];
+
+export default {
+  components: {
+    nWhiteKey,
+    nBlackKey
+  },
+  data() {
+    console.log(allKeys);
+    return {
+      keys: allKeys
+    };
+  }
+};
+</script>
 
 <style lang="stylus" scoped>
 key-width = 20px
@@ -73,19 +83,4 @@ section
       height: 100%;
       position: absolute
       display: flex
-      .white-key
-        cursor: pointer
-        width: key-width
-        height: 100%
-        margin-right: key-interval
-        background-color: white
-      .black-key
-        float: left
-        cursor: pointer
-        position: relative
-        background-color: #212121
-        left: -7px
-        width: black-key-width
-        height: 60%
-        margin-right: -14px
 </style>
