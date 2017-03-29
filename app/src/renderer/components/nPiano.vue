@@ -46,7 +46,6 @@ export default {
     nBlackKey
   },
   data() {
-    console.log(allKeys);
     return {
       keys: allKeys
     };
