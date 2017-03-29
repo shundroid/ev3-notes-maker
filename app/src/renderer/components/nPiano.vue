@@ -3,42 +3,13 @@
     .status C#4
     .piano-parent
       .keys
-        div(v-for="key in keys", :is="'n-' + key.key + '-key'", :pitch="key.pitch")
+        div(v-for="key in keys", :is="'n-' + key.type + '-key'", :pitch="key.name")
 </template>
 
 <script>
 import nWhiteKey from "@components/piano/nWhiteKey";
 import nBlackKey from "@components/piano/nBlackKey";
-
-const octave = {
-  C: "white",
-  "C#": "black",
-  D: "white",
-  "D#": "black",
-  E: "white",
-  F: "white",
-  "F#": "black",
-  G: "white",
-  "G#": "black",
-  A: "white",
-  "A#": "black",
-  B: "white"
-};
-
-function generateOctaves() {
-  const octaves = [];
-  for (let i = 1; i < 8; i++) {
-    octaves.push(...Object.keys(octave).map(pitch => {
-      return { pitch: pitch + i, key: octave[pitch] };
-    }));
-  }
-  return octaves;
-}
-
-const allKeys = [
-  { pitch: "A0", key: "white" }, { pitch: "A#0", key: "black" }, { pitch: "B0", key: "white" },
-  ...generateOctaves()
-];
+import { allKeys, getTypeOfKey } from "@lib/getOctaves";
 
 export default {
   components: {
@@ -47,7 +18,7 @@ export default {
   },
   data() {
     return {
-      keys: allKeys
+      keys: allKeys.map(key => { return { type: getTypeOfKey(key), name: key }; })
     };
   }
 };

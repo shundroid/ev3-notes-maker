@@ -1,9 +1,23 @@
 <template lang="pug">
-  .black-key
+  .black-key(@mousedown="startPreview" @mouseup="stopPreview")
 </template>
 
 <script>
-export default {};
+import { getKeyNumber } from "@lib/getOctaves";
+
+export default {
+  props: {
+    pitch: String
+  },
+  methods: {
+    startPreview() {
+      this.$store.dispatch("startPreviewKey", getKeyNumber(this.pitch));
+    },
+    stopPreview() {
+      this.$store.dispatch("stopPreviewKey");
+    }
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

@@ -156,4 +156,19 @@ describe("mutations", () => {
       assert.equal(state.playingNoteIndex, nextIndex);
     });
   });
+  describe("startPreviewKey", () => {
+    it("should change previewKey", () => {
+      const state = { previewKey: null };
+      const previewKey = "test-preview";
+      mutations.startPreviewKey(state, previewKey);
+      assert.equal(state.previewKey, previewKey);
+    });
+  });
+  describe("stopPreviewKey", () => {
+    it("should set previewKey to null", () => {
+      const state = { previewKey: "test-preview" };
+      mutations.stopPreviewKey(state);
+      assert.equal(state.previewKey, null);
+    });
+  });
 });

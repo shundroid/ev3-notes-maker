@@ -14,7 +14,8 @@ export const state = {
   isOpened: false,
   isPlaying: false,
   playingNoteIndex: -1,
-  isChanged: false
+  isChanged: false,
+  previewKey: null
 };
 
 export const mutations = {
@@ -79,6 +80,12 @@ export const mutations = {
   },
   updatePlayingNoteIndex(state, index) {
     state.playingNoteIndex = index;
+  },
+  startPreviewKey(state, keyIndex) {
+    state.previewKey = keyIndex;
+  },
+  stopPreviewKey(state) {
+    state.previewKey = null;
   }
 };
 
@@ -108,7 +115,9 @@ export const actions = {
     "save",
     "saved",
     "played",
-    "updatePlayingNoteIndex"
+    "updatePlayingNoteIndex",
+    "startPreviewKey",
+    "stopPreviewKey"
   ]),
   togglePlay({ commit, state }) {
     if (state.isPlaying) {
