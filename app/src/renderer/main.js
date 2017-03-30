@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueMaterial from "vue-material";
 import Electron from "vue-electron";
 import "vue-material/dist/vue-material.css";
+import "./style.css";
 
 Vue.use(Electron);
 Vue.use(VueMaterial);
