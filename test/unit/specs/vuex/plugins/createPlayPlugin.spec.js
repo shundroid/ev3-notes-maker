@@ -66,6 +66,8 @@ describe("PlayPlugin", () => {
       assert.equal(oscillator.frequency.value, frequency);
       assert(connectSpy.withArgs(plugin.gainNode).calledOnce);
       assert(startSpy.calledOnce);
+      connectSpy.restore();
+      startSpy.restore();
     });
   });
   describe("#generateSequence()", () => {
@@ -79,8 +81,10 @@ describe("PlayPlugin", () => {
     it("should stop preview", () => {
       const spy = sinon.spy(plugin, "stopPreview");
       plugin.previewOsc = oscillator;
-      plugin.generateSequence([]);
-      assert(spy.called);
+      plugin.audioCtx = audioCtx;
+      [...plugin.generateSequence(notes)];
+      assert(spy.calledOnce);
+      spy.restore();
     });
   });
   describe("#stop()", () => {
