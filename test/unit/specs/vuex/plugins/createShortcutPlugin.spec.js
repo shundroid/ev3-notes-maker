@@ -22,7 +22,7 @@ describe("ShortcutPlugin", () => {
   describe("#setStore()", () => {
     it("should set store", () => {
       const store = { dispatch() {} };
-      plugin.setStore(store)
+      plugin.setStore(store);
       assert.equal(plugin.store, store);
     });
   });

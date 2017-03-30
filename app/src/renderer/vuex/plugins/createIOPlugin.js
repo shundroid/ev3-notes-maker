@@ -27,7 +27,7 @@ export class IOPlugin {
           });
         }
       });
-    }
+    };
   }
   openTwoFiles(directory) {
     return new Promise((resolve, reject) => {

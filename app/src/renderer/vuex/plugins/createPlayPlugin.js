@@ -32,7 +32,7 @@ export class PlayPlugin {
           this.stopPreview();
         }
       });
-    }
+    };
   }
   stop() {
     if (this.timeoutId) {

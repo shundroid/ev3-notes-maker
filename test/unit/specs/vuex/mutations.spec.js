@@ -51,7 +51,7 @@ describe("mutations", () => {
         isChanged: false
       };
       assert.throw(() => {
-        mutations.moveUpNote(state, 0)
+        mutations.moveUpNote(state, 0);
       }, Error);
     });
   });
@@ -77,7 +77,7 @@ describe("mutations", () => {
         isChanged: false
       };
       assert.throw(() => {
-        mutations.moveDownNote(state, 1)
+        mutations.moveDownNote(state, 1);
       }, Error);
     });
   });
