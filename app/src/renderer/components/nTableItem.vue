@@ -95,22 +95,18 @@ export default {
 };
 </script>
 
-<style scoped>
-.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon {
-  margin: 8px;
-}
+<style scoped lang="stylus">
+.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon
+  margin: 8px
 
-.playing-row {
-  background-color: #fce4ec;
-}
+.playing-row
+  background-color: #fce4ec
 
-.hide {
-  display: none;
-}
+.hide
+  display: none
 
-div.md-table-cell-container div.md-input-container {
-  margin: 0;
-  padding: 0;
-  min-height: 32px;
-}
+div.md-table-cell-container div.md-input-container
+  margin: 0
+  padding: 0
+  min-height: 32px
 </style>

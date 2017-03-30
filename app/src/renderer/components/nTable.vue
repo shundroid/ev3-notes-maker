@@ -6,7 +6,12 @@
         md-table-head Length
         md-table-head.n-column-buttons
     transition-group(tag="md-table-body" name="notes-list")
-      n-table-item(v-for="(note, index) in notes", :key="note.uniqueKey", :n-key="note.key", :index="index", :length="note.length")
+      n-table-item(
+        v-for="(note, index) in notes",
+        :key="note.uniqueKey",
+        :n-key="note.key",
+        :index="index",
+        :length="note.length")
 </template>
 
 <script>
@@ -23,11 +28,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.n-column-buttons {
-  width: 100px;
-}
-.notes-list-move {
-  transition: transform 0.2s;
-}
+<style scoped lang="stylus">
+.n-column-buttons
+  width: 100px
+
+.notes-list-move
+  transition: transform 0.2s
 </style>

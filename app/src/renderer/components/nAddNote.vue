@@ -22,9 +22,8 @@ export default {
 };
 </script>
 
-<style scoped>
-section {
-  text-align: center;
-  margin-top: 10px;
-}
+<style scoped lang="stylus">
+section
+  text-align: center
+  margin-top: 10px
 </style>

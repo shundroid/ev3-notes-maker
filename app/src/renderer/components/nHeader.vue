@@ -43,38 +43,31 @@ export default {
 };
 </script>
 
-<style scoped>
-.n-header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-}
+<style scoped lang="stylus">
+.n-header
+  width: 100%
+  position: fixed
+  top: 0
 
-.md-title {
-  flex: 1;
-}
+.md-title
+  flex: 1
 
-@keyframes changed {
-  from {
-    text-shadow: none;
-  }
-  to {
-    text-shadow: 0 0 10px #ffeb3b;
-  }
-}
+@keyframes changed
+  from
+    text-shadow: none
+  to
+    text-shadow: 0 0 10px #ffeb3b
 
-span.active-changed {
-  opacity: 1;
-  animation-duration: 1s;
-  animation-name: changed;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
+span.active-changed
+  opacity: 1
+  animation-duration: 1s
+  animation-name: changed
+  animation-iteration-count: infinite
+  animation-direction: alternate
 
-.changed {
-  opacity: 0;
-  margin-right: 10px;
-  color: #ffeb3b;
-  transition: opacity 0.5s;
-}
+.changed
+  opacity: 0
+  margin-right: 10px
+  color: #ffeb3b
+  transition: opacity 0.5s
 </style>
