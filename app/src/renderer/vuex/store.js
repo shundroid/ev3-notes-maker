@@ -137,8 +137,6 @@ export const actions = {
   }
 };
 
-/* eslint no-console: 0 */
-
 export default new Vuex.Store({
   state,
   mutations,
