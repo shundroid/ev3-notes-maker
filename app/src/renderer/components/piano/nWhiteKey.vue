@@ -1,5 +1,5 @@
 <template lang="pug">
-  .white-key(@mousedown="startPreview" @mouseup="stopPreview")
+  button.white-key(@mousedown="startPreview" @mouseup="stopPreview")
 </template>
 
 <script>
@@ -25,6 +25,7 @@ key-width = 20px
 black-key-width = 14px
 key-interval = 2px
 .white-key
+  border: none
   cursor: pointer
   width: key-width
   height: 100%

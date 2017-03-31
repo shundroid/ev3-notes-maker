@@ -1,4 +1,5 @@
 import getFrequency from "@lib/getFrequency";
+import { getKeyNumber } from "@lib/getOctaves";
 
 export class PlayPlugin {
   constructor(audioCtx) {
@@ -62,7 +63,7 @@ export class PlayPlugin {
       this.currentOsc = this.audioCtx.createOscillator();
       this.currentOsc.connect(this.gainNode);
       this.currentOsc.type = "square";
-      this.currentOsc.frequency.value = getFrequency(note.key);
+      this.currentOsc.frequency.value = getFrequency(getKeyNumber(note.key));
       this.currentOsc.start();
       yield [index++, note];
       this.currentOsc.stop();

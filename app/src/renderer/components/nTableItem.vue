@@ -3,12 +3,12 @@
     md-table-cell
       span(:class="hideEditing") {{ nKey }}
       md-input-container(:class="hideNotEditing")
-        md-input(
-          type="number"
-          v-model.number="newKey"
-          @focusin.native="updateSelectedInput"
-          @focusout.native="clearSelectedInput"
+        md-textarea(
+          class="n-select-key"
+          v-model="newKey"
           ref="select-key")
+          //- @focusin.native="updateSelectedInput"
+          //- @focusout.native="clearSelectedInput"
     md-table-cell
       span(:class="hideEditing") {{ length }}
       md-input-container(:class="hideNotEditing")
@@ -32,17 +32,18 @@
 
 <script>
 import { mapState } from "vuex";
+import { getKey } from "@lib/getOctaves";
 
 export default {
   props: {
-    nKey: Number,
+    nKey: String,
     length: Number,
     index: Number
   },
   data() {
     return {
       isEditing: false,
-      newKey: 0,
+      newKey: "C4",
       newLength: 0
     };
   },
@@ -70,18 +71,14 @@ export default {
         note: { key: this.newKey, length: this.newLength }
       });
       this.isEditing = false;
-    },
-    updateSelectedInput() {
-      this.$store.dispatch("updateSelectedInput", this.$refs["select-key"].$el);
-    },
-    clearSelectedInput() {
-      this.$store.dispatch("clearSelectedInput");
     }
   },
   computed: {
     ...mapState([
       "notes",
-      "playingNoteIndex"
+      "playingNoteIndex",
+      "previewKey",
+      "selectedInput"
     ]),
     isDisabledMoveUp() {
       return this.index === 0;
@@ -101,6 +98,14 @@ export default {
       return {
         "hide": !this.isEditing
       };
+    }
+  },
+  watch: {
+    previewKey() {
+      if (this.previewKey !== null &&
+          this.selectedInput === this.$refs["select-key"].$el) {
+        this.newKey = getKey(this.previewKey);
+      }
     }
   }
 };

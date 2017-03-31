@@ -1,3 +1,5 @@
+import { getKey, getKeyNumber } from "@lib/getOctaves";
+
 export const NEW_FILE = Symbol("new-file");
 
 export class IOPlugin {
@@ -9,10 +11,7 @@ export class IOPlugin {
         if (mutation.type === "setDirectory") {
           this.openTwoFiles(mutation.payload).then(files => {
             if (files === NEW_FILE) {
-              store.dispatch("opened", {
-                keys: [],
-                lengths: []
-              });
+              store.dispatch("opened", []);
             } else {
               store.dispatch("opened", files);
             }
@@ -97,7 +96,7 @@ export class IOPlugin {
         throw new Error("The length is not a number. index: " + index);
       }
       notes.push({
-        key: parseFloat(key),
+        key: getKey(parseInt(key)),
         length: parseFloat(lengths[index]),
         uniqueKey: index
       });
@@ -108,7 +107,7 @@ export class IOPlugin {
     const keys = [];
     const lengths = [];
     notes.forEach(note => {
-      keys.push(note.key);
+      keys.push(getKeyNumber(note.key));
       lengths.push(note.length);
     });
     return { keys, lengths };

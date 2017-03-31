@@ -1,5 +1,5 @@
 <template lang="pug">
-  .black-key(@mousedown="startPreview" @mouseup="stopPreview")
+  button.black-key(@mousedown="startPreview" @mouseup="stopPreview")
 </template>
 
 <script>
@@ -25,6 +25,7 @@ key-width = 20px
 black-key-width = 14px
 key-interval = 2px
 .black-key
+  border: none
   float: left
   cursor: pointer
   position: relative

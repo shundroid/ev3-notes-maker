@@ -1,5 +1,7 @@
 <template lang="pug">
-  section.md-whiteframe-1dp(:class="{ disable: isDisable }", :style="{ left, top }")
+  section.md-whiteframe-1dp(
+    :class="{ disable: isDisable }",
+    :style="{ left, top }")
     .piano-parent
       .keys
         div(v-for="key in keys", :is="'n-' + key.type + '-key'", :pitch="key.name")
@@ -20,6 +22,16 @@ export default {
     return {
       keys: allKeys.map(key => { return { type: getTypeOfKey(key), name: key }; })
     };
+  },
+  mounted() {
+    document.body.addEventListener("mousedown", event => {
+      if (event.target.classList.contains("n-select-key")) {
+        this.$store.dispatch("updateSelectedInput", event.target);
+      } else if (event.target !== this.$el &&
+                 !event.target.className.match(/(piano-parent|keys|black-key|white-key)/)) {
+        this.$store.dispatch("clearSelectedInput");
+      }
+    });
   },
   computed: {
     ...mapState(["selectedInput"]),

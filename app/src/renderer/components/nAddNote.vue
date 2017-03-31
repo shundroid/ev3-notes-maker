@@ -9,7 +9,7 @@ export default {
   methods: {
     addNote() {
       this.$store.dispatch("addNote", {
-        key: 0,
+        key: "C4",
         length: 1
       });
     }
