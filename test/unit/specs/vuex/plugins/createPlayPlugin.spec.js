@@ -29,7 +29,7 @@ describe("PlayPlugin", () => {
       start() {},
       stop() {}
     };
-    notes = [{ key: 49, length: 1 }];
+    notes = [{ key: "A4", length: 1 }];
     done();
   });
   describe("#constructor()", () => {
@@ -73,8 +73,8 @@ describe("PlayPlugin", () => {
   describe("#generateSequence()", () => {
     it("should generate", () => {
       plugin.audioCtx = audioCtx;
-      const itr = plugin.generateSequence(notes);
-      assert.deepEqual([...itr], [[0].concat(notes)]);
+      const itr = [...plugin.generateSequence(notes)];
+      assert.deepEqual(itr, [[0].concat(notes)]);
       assert.equal(oscillator.type, "square");
       assert.equal(oscillator.frequency.value, frequency);
     });

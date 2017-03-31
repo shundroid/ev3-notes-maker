@@ -16,16 +16,16 @@ describe("IOPlugin", () => {
   });
   describe("#toNotes()", () => {
     it("should convert to notes", () => {
-      const keyParse1 = "1\r\n0.5\r\n8\r\n10\r\n100\r\n0.01\r\n3";
+      const keyParse1 = "1\r\n2\r\n8\r\n10\r\n20\r\n3\r\n3";
       const lengthParse1 = "0\r\n0.5\r\n1\r\n10\r\n100\r\n0.01\r\n3";
       const parseResult1 = [
-        { key: 1, length: 0, uniqueKey: 0 },
-        { key: 0.5, length: 0.5, uniqueKey: 1 },
-        { key: 8, length: 1, uniqueKey: 2 },
-        { key: 10, length: 10, uniqueKey: 3 },
-        { key: 100, length: 100, uniqueKey: 4 },
-        { key: 0.01, length: 0.01, uniqueKey: 5 },
-        { key: 3, length: 3, uniqueKey: 6 },
+        { key: "A0", length: 0, uniqueKey: 0 },
+        { key: "A#0", length: 0.5, uniqueKey: 1 },
+        { key: "E1", length: 1, uniqueKey: 2 },
+        { key: "F#1", length: 10, uniqueKey: 3 },
+        { key: "E2", length: 100, uniqueKey: 4 },
+        { key: "B0", length: 0.01, uniqueKey: 5 },
+        { key: "B0", length: 3, uniqueKey: 6 },
       ];
       const keyParse2 = "1\r\n0.8";
       const lengthParse2 = "1";
@@ -38,17 +38,17 @@ describe("IOPlugin", () => {
       }, Error);
       assert.throw(() => {
         plugin.toNotes(keyParse3, lengthParse3);
-      });
+      }, Error);
     });
   });
   describe("#fromNotes()", () => {
     it("should convert from notes", () => {
       const notes = [
-        { key: 1, length: 2 },
-        { key: 0.5, length: 1.6 },
-        { key: 0.01, length: 12000 }
+        { key: "A2", length: 2 },
+        { key: "G#3", length: 1.6 },
+        { key: "D#2", length: 12000 }
       ];
-      const keys = [1, 0.5, 0.01];
+      const keys = [25, 36, 19];
       const lengths = [2, 1.6, 12000];
       assert.deepEqual(plugin.fromNotes(notes), { keys, lengths });
     });
