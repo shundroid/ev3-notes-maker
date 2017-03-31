@@ -28,5 +28,5 @@ describe("actions", () => {
       actions.togglePlay({ commit: spy, state });
       assert(spy.withArgs("stop").calledOnce);
     });
-  })
+  });
 });

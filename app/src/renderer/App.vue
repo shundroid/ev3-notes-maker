@@ -4,39 +4,39 @@
     main
       n-table
       n-add-note
+      n-piano
 </template>
 
 <script>
 import nHeader from "@components/nHeader";
 import nAddNote from "@components/nAddNote";
 import nTable from "@components/nTable";
+import nPiano from "@components/nPiano";
 import store from "@vuex/store";
 
 export default {
   components: {
     nHeader,
     nAddNote,
-    nTable
+    nTable,
+    nPiano
   },
   store
 };
 </script>
 
-<style>
-@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic";
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+<style lang="stylus">
+body
+  margin: 0
 
-body {
-  margin: 0;
-}
-html, body, #app, .ml-main {
-  height: 100vh;
-}
-main {
-  width: 100%;
-  padding: 10px;
-}
-#app {
-  margin-top: 64px;
-}
+html, body, #app, .ml-main
+  height: 100vh
+
+main
+  width: 100%
+  padding: 10px
+
+#app
+  margin-top: 64px
+
 </style>

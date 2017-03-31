@@ -25,12 +25,12 @@ describe("createSelectDirectoryPlugin", () => {
   it("should open dialog", () => {
     const spy = sinon.spy(dialog, "showOpenDialog");
     let callback = null;
-    store.subscribe = _callback => { callback = _callback };
+    store.subscribe = _callback => { callback = _callback; };
     plugin(store);
     assert(callback);
     callback(mutation);
     assert(spy.calledOnce);
     spy.restore();
-  })
+  });
   it("should dispatch a event");
 });

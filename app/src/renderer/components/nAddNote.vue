@@ -9,7 +9,7 @@ export default {
   methods: {
     addNote() {
       this.$store.dispatch("addNote", {
-        key: 0,
+        key: "C4",
         length: 1
       });
     }
@@ -22,9 +22,8 @@ export default {
 };
 </script>
 
-<style scoped>
-section {
-  text-align: center;
-  margin-top: 10px;
-}
+<style scoped lang="stylus">
+section
+  text-align: center
+  margin-top: 10px
 </style>

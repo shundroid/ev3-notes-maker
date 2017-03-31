@@ -3,7 +3,12 @@
     md-table-cell
       span(:class="hideEditing") {{ nKey }}
       md-input-container(:class="hideNotEditing")
-        md-input(type="number" v-model.number="newKey")
+        md-textarea(
+          class="n-select-key"
+          v-model="newKey"
+          ref="select-key")
+          //- @focusin.native="updateSelectedInput"
+          //- @focusout.native="clearSelectedInput"
     md-table-cell
       span(:class="hideEditing") {{ length }}
       md-input-container(:class="hideNotEditing")
@@ -27,17 +32,18 @@
 
 <script>
 import { mapState } from "vuex";
+import { getKey } from "@lib/getOctaves";
 
 export default {
   props: {
-    nKey: Number,
+    nKey: String,
     length: Number,
     index: Number
   },
   data() {
     return {
       isEditing: false,
-      newKey: 0,
+      newKey: "C4",
       newLength: 0
     };
   },
@@ -70,7 +76,9 @@ export default {
   computed: {
     ...mapState([
       "notes",
-      "playingNoteIndex"
+      "playingNoteIndex",
+      "previewKey",
+      "selectedInput"
     ]),
     isDisabledMoveUp() {
       return this.index === 0;
@@ -91,26 +99,30 @@ export default {
         "hide": !this.isEditing
       };
     }
+  },
+  watch: {
+    previewKey() {
+      if (this.previewKey !== null &&
+          this.selectedInput === this.$refs["select-key"].$el) {
+        this.newKey = getKey(this.previewKey);
+      }
+    }
   }
 };
 </script>
 
-<style scoped>
-.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon {
-  margin: 8px;
-}
+<style scoped lang="stylus">
+.n-column-buttons .md-table-cell-container .md-button.md-icon-button .md-icon
+  margin: 8px
 
-.playing-row {
-  background-color: #fce4ec;
-}
+.playing-row
+  background-color: #fce4ec
 
-.hide {
-  display: none;
-}
+.hide
+  display: none
 
-div.md-table-cell-container div.md-input-container {
-  margin: 0;
-  padding: 0;
-  min-height: 32px;
-}
+div.md-table-cell-container div.md-input-container
+  margin: 0
+  padding: 0
+  min-height: 32px
 </style>

@@ -51,7 +51,7 @@ describe("mutations", () => {
         isChanged: false
       };
       assert.throw(() => {
-        mutations.moveUpNote(state, 0)
+        mutations.moveUpNote(state, 0);
       }, Error);
     });
   });
@@ -77,7 +77,7 @@ describe("mutations", () => {
         isChanged: false
       };
       assert.throw(() => {
-        mutations.moveDownNote(state, 1)
+        mutations.moveDownNote(state, 1);
       }, Error);
     });
   });
@@ -154,6 +154,36 @@ describe("mutations", () => {
       const nextIndex = 2;
       mutations.updatePlayingNoteIndex(state, nextIndex);
       assert.equal(state.playingNoteIndex, nextIndex);
+    });
+  });
+  describe("startPreviewKey", () => {
+    it("should change previewKey", () => {
+      const state = { previewKey: null };
+      const previewKey = "test-preview";
+      mutations.startPreviewKey(state, previewKey);
+      assert.equal(state.previewKey, previewKey);
+    });
+  });
+  describe("stopPreviewKey", () => {
+    it("should set previewKey to null", () => {
+      const state = { previewKey: "test-preview" };
+      mutations.stopPreviewKey(state);
+      assert.equal(state.previewKey, null);
+    });
+  });
+  describe("updateSelectedInput", () => {
+    it("should update selectedInput", () => {
+      const selectedInput = "selected-input";
+      const state = { selectedInput: null };
+      mutations.updateSelectedInput(state, selectedInput);
+      assert.equal(state.selectedInput, selectedInput);
+    });
+  });
+  describe("clearSelectedInput", () => {
+    it("should clear selectedInput", () => {
+      const state = { selectedInput: "selected-input" };
+      mutations.clearSelectedInput(state);
+      assert.equal(state.selectedInput, null);
     });
   });
 });

@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import createSelectDirectoryPlugin from "@vuex/plugins/createSelectDirectoryPlugin";
 import createIOPlugin from "@vuex/plugins/createIOPlugin";
 import createPlayPlugin from "@vuex/plugins/createPlayPlugin";
+import createShortcutPlugin from "@vuex/plugins/createShortcutPlugin";
 import { remote } from "electron";
 
 Vue.use(Vuex);
@@ -13,7 +14,9 @@ export const state = {
   isOpened: false,
   isPlaying: false,
   playingNoteIndex: -1,
-  isChanged: false
+  isChanged: false,
+  previewKey: null,
+  selectedInput: null
 };
 
 export const mutations = {
@@ -78,6 +81,18 @@ export const mutations = {
   },
   updatePlayingNoteIndex(state, index) {
     state.playingNoteIndex = index;
+  },
+  startPreviewKey(state, keyIndex) {
+    state.previewKey = keyIndex;
+  },
+  stopPreviewKey(state) {
+    state.previewKey = null;
+  },
+  updateSelectedInput(state, input) {
+    state.selectedInput = input;
+  },
+  clearSelectedInput(state) {
+    state.selectedInput = null;
   }
 };
 
@@ -107,7 +122,11 @@ export const actions = {
     "save",
     "saved",
     "played",
-    "updatePlayingNoteIndex"
+    "updatePlayingNoteIndex",
+    "startPreviewKey",
+    "stopPreviewKey",
+    "updateSelectedInput",
+    "clearSelectedInput"
   ]),
   togglePlay({ commit, state }) {
     if (state.isPlaying) {
@@ -118,8 +137,6 @@ export const actions = {
   }
 };
 
-/* eslint no-console: 0 */
-
 export default new Vuex.Store({
   state,
   mutations,
@@ -127,6 +144,7 @@ export default new Vuex.Store({
   plugins: [
     createSelectDirectoryPlugin(remote.dialog),
     createIOPlugin(remote.require("fs"), remote.require("path")),
-    createPlayPlugin(new AudioContext)
+    createPlayPlugin(new AudioContext),
+    createShortcutPlugin()
   ]
 });
