@@ -171,4 +171,19 @@ describe("mutations", () => {
       assert.equal(state.previewKey, null);
     });
   });
+  describe("updateSelectedInput", () => {
+    it("should update selectedInput", () => {
+      const selectedInput = "selected-input";
+      const state = { selectedInput: null };
+      mutations.updateSelectedInput(state, selectedInput);
+      assert.equal(state.selectedInput, selectedInput);
+    });
+  });
+  describe("clearSelectedInput", () => {
+    it("should clear selectedInput", () => {
+      const state = { selectedInput: "selected-input" };
+      mutations.clearSelectedInput(state);
+      assert.equal(state.selectedInput, null);
+    });
+  });
 });

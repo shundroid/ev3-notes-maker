@@ -3,7 +3,12 @@
     md-table-cell
       span(:class="hideEditing") {{ nKey }}
       md-input-container(:class="hideNotEditing")
-        md-input(type="number" v-model.number="newKey")
+        md-input(
+          type="number"
+          v-model.number="newKey"
+          @focusin.native="updateSelectedInput"
+          @focusout.native="clearSelectedInput"
+          ref="select-key")
     md-table-cell
       span(:class="hideEditing") {{ length }}
       md-input-container(:class="hideNotEditing")
@@ -65,6 +70,12 @@ export default {
         note: { key: this.newKey, length: this.newLength }
       });
       this.isEditing = false;
+    },
+    updateSelectedInput() {
+      this.$store.dispatch("updateSelectedInput", this.$refs["select-key"].$el);
+    },
+    clearSelectedInput() {
+      this.$store.dispatch("clearSelectedInput");
     }
   },
   computed: {
