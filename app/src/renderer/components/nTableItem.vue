@@ -1,27 +1,15 @@
 <template lang="pug">
   md-table-row(:class="{ 'playing-row': isPlaying }")
     md-table-cell
-      span(:class="hideEditing") {{ nKey }}
-      md-input-container(:class="hideNotEditing")
+      md-input-container
         md-textarea(
           class="n-select-key"
           v-model="newKey"
           ref="select-key")
-          //- @focusin.native="updateSelectedInput"
-          //- @focusout.native="clearSelectedInput"
     md-table-cell
-      span(:class="hideEditing") {{ length }}
-      md-input-container(:class="hideNotEditing")
-        md-input(type="number" v-model.number="newLength")
+      md-select(v-model="newLength")
+        md-option(v-for="note in notes", :value="note.value") {{ note.label }}
     md-table-cell.n-column-buttons
-      md-button.md-icon-button(@click.native="edit", :class="hideEditing")
-        md-icon mode_edit
-      md-button.md-icon-button(@click.native="apply", :class="hideNotEditing")
-        md-icon done
-        md-tooltip Apply
-      md-button.md-icon-button(@click.native="cancelEdit", :class="hideNotEditing")
-        md-icon close
-        md-tooltip Discard
       md-button.md-icon-button(@click.native="remove")
         md-icon delete
       md-button.md-icon-button(@click.native="moveUp", :disabled="isDisabledMoveUp")
@@ -33,19 +21,23 @@
 <script>
 import { mapState } from "vuex";
 import { getKey } from "@lib/getOctaves";
+import { getValueAndLabel } from "@lib/getNotes";
 
 export default {
   props: {
     nKey: String,
-    length: Number,
+    length: String,
     index: Number
   },
   data() {
     return {
-      isEditing: false,
-      newKey: "C4",
-      newLength: 0
+      newKey: this.nKey,
+      newLength: this.length,
+      notes: []
     };
+  },
+  created() {
+    this.notes = getValueAndLabel();
   },
   methods: {
     remove() {
@@ -57,20 +49,11 @@ export default {
     moveDown() {
       this.$store.dispatch("moveDownNote", this.index);
     },
-    edit() {
-      this.newKey = this.nKey;
-      this.newLength = this.length;
-      this.isEditing = true;
-    },
-    cancelEdit() {
-      this.isEditing = false;
-    },
     apply() {
       this.$store.dispatch("updateNote", {
         index: this.index,
         note: { key: this.newKey, length: this.newLength }
       });
-      this.isEditing = false;
     }
   },
   computed: {
@@ -88,16 +71,6 @@ export default {
     },
     isPlaying() {
       return this.index === this.playingNoteIndex;
-    },
-    hideEditing() {
-      return {
-        "hide": this.isEditing
-      };
-    },
-    hideNotEditing() {
-      return {
-        "hide": !this.isEditing
-      };
     }
   },
   watch: {
@@ -106,6 +79,12 @@ export default {
           this.selectedInput === this.$refs["select-key"].$el) {
         this.newKey = getKey(this.previewKey);
       }
+    },
+    newKey() {
+      this.apply();
+    },
+    newLength() {
+      this.apply();
     }
   }
 };
@@ -117,9 +96,6 @@ export default {
 
 .playing-row
   background-color: #fce4ec
-
-.hide
-  display: none
 
 div.md-table-cell-container div.md-input-container
   margin: 0

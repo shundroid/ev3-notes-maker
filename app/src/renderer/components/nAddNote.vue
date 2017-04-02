@@ -10,7 +10,7 @@ export default {
     addNote() {
       this.$store.dispatch("addNote", {
         key: "C4",
-        length: 1
+        length: "whole-note"
       });
     }
   },
