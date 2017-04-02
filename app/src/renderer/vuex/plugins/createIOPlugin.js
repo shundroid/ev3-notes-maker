@@ -1,4 +1,5 @@
 import { getKey, getKeyNumber } from "@lib/getOctaves";
+import { getNote, getLength } from "@lib/getNotes";
 
 export const NEW_FILE = Symbol("new-file");
 
@@ -97,7 +98,7 @@ export class IOPlugin {
       }
       notes.push({
         key: getKey(parseInt(key)),
-        length: parseFloat(lengths[index]),
+        length: getNote(parseFloat(lengths[index])),
         uniqueKey: index
       });
     });
@@ -108,7 +109,7 @@ export class IOPlugin {
     const lengths = [];
     notes.forEach(note => {
       keys.push(getKeyNumber(note.key));
-      lengths.push(note.length);
+      lengths.push(getLength(note.length));
     });
     return { keys, lengths };
   }

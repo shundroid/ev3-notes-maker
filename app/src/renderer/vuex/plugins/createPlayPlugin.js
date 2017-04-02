@@ -1,5 +1,6 @@
 import getFrequency from "@lib/getFrequency";
 import { getKeyNumber } from "@lib/getOctaves";
+import { getLength } from "@lib/getNotes";
 
 export class PlayPlugin {
   constructor(audioCtx) {
@@ -19,7 +20,7 @@ export class PlayPlugin {
             if (!item.done) {
               const [index, note] = item.value;
               store.dispatch("updatePlayingNoteIndex", index);
-              this.timeoutId = setTimeout(tick, note.length * 500);
+              this.timeoutId = setTimeout(tick, getLength(note.length) * 2000);
             } else {
               store.dispatch("played");
             }
