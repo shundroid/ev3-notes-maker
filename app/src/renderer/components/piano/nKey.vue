@@ -1,5 +1,8 @@
 <template lang="pug">
-  button.white-key(@mousedown="startPreview" @mouseup="stopPreview")
+  button(
+    @mousedown="startPreview",
+    @mouseup="stopPreview",
+    :class="classes")
 </template>
 
 <script>
@@ -7,7 +10,8 @@ import { getKeyNumber } from "@lib/getOctaves";
 
 export default {
   props: {
-    pitch: String
+    pitch: String,
+    keyType: String
   },
   methods: {
     startPreview() {
@@ -15,6 +19,14 @@ export default {
     },
     stopPreview() {
       this.$store.dispatch("stopPreviewKey");
+    }
+  },
+  computed: {
+    classes() {
+      return {
+        'black-key': this.keyType === "black",
+        'white-key': this.keyType === "white"
+      };
     }
   }
 };
@@ -24,6 +36,16 @@ export default {
 key-width = 20px
 black-key-width = 14px
 key-interval = 2px
+.black-key
+  border: none
+  float: left
+  cursor: pointer
+  position: relative
+  background-color: #212121
+  left: -7px
+  width: black-key-width
+  height: 60%
+  margin-right: -14px
 .white-key
   border: none
   cursor: pointer

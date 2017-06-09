@@ -3,19 +3,20 @@
     :class="{ disable: isDisable }")
     .piano-parent
       .keys
-        div(v-for="key in keys", :is="'n-' + key.type + '-key'", :pitch="key.name")
+        n-key(
+          v-for="key in keys",
+          :keyType="key.type",
+          :pitch="key.name")
 </template>
 
 <script>
-import nWhiteKey from "@components/piano/nWhiteKey";
-import nBlackKey from "@components/piano/nBlackKey";
+import nKey from "@components/piano/nKey";
 import { allKeys, getTypeOfKey } from "@lib/getOctaves";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    nWhiteKey,
-    nBlackKey
+    nKey
   },
   data() {
     return {
