@@ -1,5 +1,5 @@
 <template lang="pug">
-  md-table
+  md-table.n-table
     md-table-header
       md-table-row
         md-table-head Key
@@ -34,4 +34,12 @@ export default {
 
 .notes-list-move
   transition: transform 0.2s
+
+.n-table
+  overflow-x: visible
+</style>
+
+<style lang="stylus">
+.n-table table
+  overflow-x: visible
 </style>

@@ -1,7 +1,6 @@
 <template lang="pug">
   section.md-whiteframe-1dp(
-    :class="{ disable: isDisable }",
-    :style="{ left, top }")
+    :class="{ disable: isDisable }")
     .piano-parent
       .keys
         div(v-for="key in keys", :is="'n-' + key.type + '-key'", :pitch="key.name")
@@ -37,20 +36,16 @@ export default {
     ...mapState(["selectedInput"]),
     isDisable() {
       return this.selectedInput === null;
-    },
-    left() {
-      if (this.selectedInput) {
-        const rect = this.selectedInput.getBoundingClientRect();
-        return `${rect.left}px`;
+    }
+  },
+  watch: {
+    selectedInput() {
+      if (this.$el.parentNode !== null) {
+        this.$el.parentNode.removeChild(this.$el);
       }
-      return 0;
-    },
-    top() {
-      if (this.selectedInput) {
-        const rect = this.selectedInput.getBoundingClientRect();
-        return `${rect.top + rect.height - 64}px`;
+      if (this.selectedInput !== null) {
+        this.selectedInput.parentNode.appendChild(this.$el);
       }
-      return 0;
     }
   }
 };
@@ -71,6 +66,9 @@ key-interval = 2px
   opacity: 0
 section
   position: absolute
+  left: 0
+  top: 32px
+  z-index: 2
   background-color: #e53935
   height: 120px
   padding-top: 30px
